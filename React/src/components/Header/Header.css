@@ -1,0 +1,78 @@
+/* HEADER GENERAL */
+.library-header {
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(to bottom, #D87A2E, #F4A35E);
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  font-family: 'Georgia', serif;
+  color: #F4C16E;
+  box-sizing: border-box;
+  padding: 0 1rem;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.logo-container {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.library-logo {
+  height: 100%;          
+  width: auto;
+  max-height: 120px;     
+  max-width: 200px;      
+  object-fit: contain;
+  margin-right: 1rem;    
+  margin-left: 5px;      
+}
+
+.header-text {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  white-space: nowrap; 
+  overflow: hidden;
+}
+.library-title {
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  -webkit-text-stroke: 0.5px rgba(0,0,0,0.3);
+}
+.library-subtitle {
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  margin: 0.2rem 0 0 0;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-family: 'Georgia', serif;
+}
+@media (max-width: 600px) {
+  .library-logo {
+    max-width: 120px;
+    max-height: 100px;
+    margin-right: 0.5rem;
+  }
+
+  .library-title {
+    font-size: 1.6rem;
+  }
+
+  .library-subtitle {
+    font-size: 0.9rem;
+  }
+}

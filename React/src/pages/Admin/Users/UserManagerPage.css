@@ -1,0 +1,103 @@
+/*Fondo general*/
+.user-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5e6d3, #fdf6f0);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/*Título*/
+.user-title {
+  font-size: 2rem !important;
+  font-weight: bold;
+  font-style: italic;
+  text-align: center;
+  color: #5d3a00;
+  text-shadow: 0 0 5px #fff5e6, 0 0 10px #ffd699, 0 0 15px #ffb84d;
+}
+
+/*Pestañas*/
+.tab-menu {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.tab-btn {
+  background-color: #fffaf5 !important;
+  color: #5d3a00 !important;
+  border-radius: 8px !important;
+  font-weight: bold !important;
+  padding: 0.5rem 1.5rem !important;
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.2);
+  transition: all 0.3s ease;
+}
+.tab-btn:hover {
+  background-color: #f0e0d6 !important;
+}
+.tab-active {
+  background-color: #8b5e34 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.4);
+  transform: scale(1.05);
+}
+
+/*Tablas*/
+.user-table-container {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2);
+}
+.user-table-header {
+  background-color: #5d3a00;
+}
+.user-table-header th {
+  color: #fff !important;
+  font-weight: bold;
+}
+.user-row {
+  background-color: #fffaf5;
+  transition: all 0.3s ease;
+}
+.user-row:hover {
+  background-color: #f0e0d6;
+  transform: scale(1.01);
+}
+
+/*Botones*/
+.btn-edit {
+  color: #8b5e34 !important;
+}
+.btn-delete {
+  color: #d32f2f !important;
+}
+.btn-back {
+  background-color: #8b5e34 !important;
+  color: #fff !important;
+  font-weight: bold !important;
+  margin-bottom: 1rem !important;
+  border-radius: 8px !important;
+  padding: 0.4rem 1rem !important;
+}
+
+/*Cartel de restricción*/
+.restriction-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fffaf2, #f5e6d3) !important;
+}
+.restriction-alert {
+  background-color: #fffaf2 !important;
+  color: #5d3a00 !important;
+  font-family: "Georgia", serif !important;
+  font-weight: bold !important;
+  font-size: 1.2rem !important;
+  border: 2px solid #8b5e34 !important;
+  border-radius: 10px !important;
+  padding: 1.5rem 2rem !important;
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3) !important;
+  text-align: center;
+}

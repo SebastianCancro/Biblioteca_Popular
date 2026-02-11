@@ -1,0 +1,152 @@
+/*NAVBAR GENERAL*/
+.admin-navbar {
+  background-color: #000 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.admin-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 80px;
+  padding: 0 1rem;
+  transition: all 0.3s ease;
+}
+
+/*Logo*/
+.logo {
+  height: 60px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+/*Texto*/
+.welcome-panel {
+  color: #f5e6d3;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 1px 1px 5px #8b5e34;
+  flex: 1;
+}
+.user-section {
+  display: flex;
+  align-items: center;
+}
+
+.user-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 20px;
+}
+
+.welcome-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #f5e6d3;
+}
+.logout-button {
+  background-color: transparent !important;
+  color: #d2b48c !important; 
+  font-weight: 600;
+  text-transform: none;
+  text-decoration: none !important; 
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: #8b5e34 !important;
+  color: #f5e6d3 !important;
+  transform: scale(1.05);
+}
+
+/* CERRAR SESIÓN EN DRAWER*/
+.logout-text {
+  color: #3d2314 !important;
+  font-weight: 600;
+  text-decoration: none !important; 
+  transition: color 0.2s ease;
+}
+
+.logout-text:hover {
+  color: #8b5e34 !important;
+  text-decoration: none !important;
+}
+
+/* DRAWER GENERAL*/
+.MuiDrawer-paper {
+  background-color: #fdfaf6 !important; 
+  color: #3d2314 !important;
+}
+
+.MuiListItemText-primary {
+  color: #3d2314 !important;
+  font-weight: 600 !important;
+  font-family: "Georgia", serif !important;
+  transition: color 0.2s ease;
+}
+
+.MuiListItemText-primary:hover {
+  color: #8b5e34 !important;
+}
+
+.MuiTypography-body1 {
+  color: #3d2314 !important;
+  font-weight: bold;
+}
+
+/*Avatar gral*/
+.MuiAvatar-root {
+  border: 2px solid #8b5e34;
+  box-shadow: 0 0 10px rgba(139, 94, 52, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.MuiAvatar-root:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(245, 230, 211, 0.9);
+}
+
+.user-avatar {
+  width: 50px !important;
+  height: 50px !important;
+  background-color: #8b5e34 !important;
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+.drawer-avatar {
+  width: 60px !important;
+  height: 60px !important;
+  background-color: #8b5e34 !important;
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+/*RESPONSIVIDAD*/
+.desktop-only {
+  display: flex;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none;
+  }
+  .mobile-only {
+    display: flex;
+  }
+}

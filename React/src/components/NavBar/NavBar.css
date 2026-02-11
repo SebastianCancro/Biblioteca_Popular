@@ -1,0 +1,63 @@
+.NavBox {
+  display: flex;
+  gap: 2rem;               
+  justify-content: center;  
+  align-items: center;      
+  flex-wrap: wrap;          
+  margin: 0 auto;           
+}
+
+/* Botones */
+.NavButton {
+  color: #F4C16E !important;          
+  background: #FFB066;                 
+  font-family: 'Georgia', serif;       
+  font-weight: 700;
+  font-size: clamp(1rem, 1.5vw, 1.2rem); 
+  padding: 0.8rem 1.5rem;             
+  border-radius: 10px;
+  text-transform: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  border: 2px solid #FFE0B2;           /
+}
+
+.NavButton:hover {
+  background: #F4A35E;                 
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+}
+
+/* Botón activo */
+.NavButton.active {
+  background: #F4C16E;                  
+  color: #D87A2E !important;            
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  border: 2px solid #FFE0B2;            
+}
+
+
+.MuiAppBar-root {
+  background-color: #000000 !important;;
+  box-shadow: none;
+}
+
+.MuiToolbar-root {
+  display: flex !important;
+  justify-content: center !important; 
+}
+
+
+@media (max-width: 600px) {
+  .NavBox {
+    gap: 1rem;         
+  }
+
+  .NavButton {
+    font-size: 1.1rem;
+    padding: 0.7rem 1.2rem;
+    width: 100%;
+    text-align: center;
+  }
+}

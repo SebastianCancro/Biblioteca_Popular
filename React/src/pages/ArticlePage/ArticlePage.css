@@ -1,0 +1,121 @@
+.articles-container {
+  padding: 36px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.articles-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.article-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.article-card {
+  background: #ffffff;
+  border: 1px solid #ead9c2;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 6px 18px rgba(44, 30, 15, 0.08);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.article-card:hover {
+  border-color: #620707;
+  box-shadow: 0 12px 24px rgba(44, 30, 15, 0.12);
+}
+.article-image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  display: block;
+  background-color: #f2ebe0;
+  transition: transform 0.3s ease;
+}
+
+.article-card:hover .article-image {
+  transform: scale(1.05);
+}
+.article-image--placeholder {
+  height: 240px;
+  background: linear-gradient(180deg, #f2ebe0 0%, #e9ddc8 100%);
+  color: #6b4a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+}
+.article-card:hover .MuiTypography-h6 {
+  color: #620707;
+  text-decoration: underline;
+}
+.article-date {
+  color: #8b6f52;
+  display: block;
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+.article-summary {
+  color: #2e2a25;
+  line-height: 1.6;
+  font-size: 1rem;
+  margin-top: 8px;
+  text-align: justify;
+}
+.pagination-container {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.pagination-button {
+  min-width: 40px;
+  padding: 6px 12px;
+  font-weight: bold;
+  border-radius: 8px;
+}
+.pagination-button.active {
+  background-color: #620707;
+  color: white;
+}
+.pagination-button:hover {
+  opacity: 0.85;
+}
+
+@media (max-width: 600px) {
+  .articles-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .article-image,
+  .article-image--placeholder {
+    height: 180px;
+  }
+
+  .articles-container {
+    padding: 32px 12px;
+  }
+
+  .article-card .MuiTypography-h6 {
+    font-size: 1.2rem;
+  }
+
+  .article-summary {
+    font-size: 0.95rem;
+  }
+}

@@ -1,0 +1,90 @@
+/* Fondo general */
+.admin-home-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5e6d3, #fdf6f0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+/* Frase */
+.sentence {
+  font-size: 2rem !important; 
+  font-weight: bold;
+  font-style: italic; 
+  color: #5d3a00;
+  text-align: center;
+
+  /* efecto de brillo */
+  text-shadow: 
+    0 0 5px #fff5e6, 
+    0 0 10px #ffd699, 
+    0 0 15px #ffb84d;
+
+  transition: all 0.5s ease;
+}
+
+.sentence:hover {
+  color: #8b5e34;
+  text-shadow: 
+    0 0 10px #fff5e6, 
+    0 0 20px #ffd699, 
+    0 0 30px #ffb84d;
+  transform: scale(1.05);
+}
+
+/* Tarjetas administrativas */
+.admin-card {
+  width: 240px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 12px;
+  background-color: #fffaf5;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+}
+.admin-card-content {
+  text-align: center;
+}
+
+.admin-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(139, 69, 19, 0.5);
+}
+
+/* Responsive*/
+@media (max-width: 1024px) {
+  .sentence {
+    font-size: 3rem !important;
+  }
+  .admin-card {
+    width: 200px;
+    height: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sentence {
+    font-size: 2.5rem !important;
+  }
+  .admin-card {
+    width: 180px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sentence {
+    font-size: 2rem !important;
+  }
+  .admin-card {
+    width: 160px;
+    height: 140px;
+  }
+}

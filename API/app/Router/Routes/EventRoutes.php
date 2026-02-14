@@ -5,7 +5,7 @@ final readonly class EventRoutes {
     return [
       [
         "name" => "event_get",
-        "url" => "/events",
+        "url" => "/events/{id}",
         "controller" => "Event/EventGetController.php",
         "method" => "GET",
         "parameters" => [
@@ -27,9 +27,9 @@ final readonly class EventRoutes {
         "controller" => "Event/EventPostController.php",
         "method" => "POST"
       ],
-      [
+     [
         "name" => "event_put",
-        "url" => "/events",
+        "url" => "/events/{id}",
         "controller" => "Event/EventPutController.php",
         "method" => "PUT",
         "parameters" => [
@@ -41,7 +41,7 @@ final readonly class EventRoutes {
       ],
       [
         "name" => "event_delete",
-        "url" => "/events",
+        "url" => "/events/{id}",
         "controller" => "Event/EventDeleteController.php",
         "method" => "DELETE",
         "parameters" => [

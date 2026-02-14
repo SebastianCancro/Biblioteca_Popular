@@ -1,44 +1,36 @@
 <?php
+declare(strict_types=1);
 
-use Src\Service\User\UserManagementService;
 use Src\Middleware\AuthMiddleware;
-use Src\Entity\User\User;
+use Src\Service\User\UserUpdaterService;
+use Src\Utils\ControllerUtils;
 
 final class UserUpdateController
 {
     public function start(int $id): void
     {
-        header("Content-Type: application/json; charset=utf-8");
+        header('Content-Type: application/json; charset=utf-8');
 
-        $raw = file_get_contents("php://input") ?: "{}";
-        $body = json_decode($raw, true) ?? [];
-
-        try {
-            $auth = new AuthMiddleware();
-            $superAdmId = $auth->authenticate();
-
-            $service = new UserManagementService();
-
-            $user = new User(
-                $id,
-                $body["name"] ?? "",
-                $body["email"] ?? "",
-                $body["password"] ?? "",
-                null,
-                null,
-                $body["role"] ?? "visitor",
-                (bool)($body["is_active"] ?? false)
-            );
-
-            $service->updateUser($superAdmId, $user);
-
-            echo json_encode([
-                "status" => "ok",
-                "message" => "Usuario actualizado correctamente"
-            ]);
-        } catch (\Throwable $e) {
-            http_response_code(400);
-            echo json_encode(["error" => $e->getMessage()]);
+        $m = $_SERVER['REQUEST_METHOD'] ?? '';
+        if (!in_array($m, ['PUT', 'PATCH'], true)) {
+            header('Allow: PUT, PATCH');
+            http_response_code(405);
+            echo json_encode(['error' => 'Método no permitido']);
+            return;
         }
+        // Solo super_adm //
+        $actorId = (new AuthMiddleware())->authenticate(true, ['super_adm']);
+        // recojo datos //
+        $fields = [];
+        foreach (['name','email','password','role','is_active','apellido','dni'] as $k) {
+            $v = ControllerUtils::getPost($k, false);
+            $fields[$k] = $v !== null ? $v : ($_POST[$k] ?? null);
+        }
+        (new UserUpdaterService())->updateFromArray($id, $fields, $actorId);
+        http_response_code(200);
+        echo json_encode(
+            ['status' => 'ok', 'message' => 'Usuario actualizado correctamente'],
+            JSON_UNESCAPED_UNICODE
+        );
     }
 }

@@ -4,8 +4,10 @@ namespace Src\Entity\User\Exception;
 
 use Exception;
 
-final class UserAlreadyExistsException extends Exception {
-    public function __construct() {
-        parent::__construct('El email ingresado ya se encuentra en uso.');
+final class UserAlreadyExistsException extends Exception
+{
+    public function __construct(string $message = 'El email ingresado ya se encuentra en uso.')
+    {
+        parent::__construct($message);
     }
 }

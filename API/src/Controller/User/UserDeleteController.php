@@ -1,29 +1,36 @@
 <?php
+declare(strict_types=1);
 
 use Src\Middleware\AuthMiddleware;
-use Src\Service\User\UserDeleterService;
-
-final readonly class UserDeleteController {
-    private UserDeleterService $service;
-    private AuthMiddleware $auth;
-
-    public function __construct() {
-        // Inicializamos los servicios //
-        $this->service = new UserDeleterService();
-        $this->auth = new AuthMiddleware();
-    }
+use Src\Service\User\UserDeleteService;
+use Src\Entity\User\Exception\UserNotFoundException;
+// Controlador para eliminar un usuario //
+final readonly class UserDeleteController
+{
+    public function __construct(
+        private UserDeleteService $service = new UserDeleteService(),
+    ) {}
 
     public function start(int $id): void
     {
-        // Validar token y rol permitido //
-        $this->auth->authenticate(true, ['super_adm']);
+        header('Content-Type: application/json; charset=utf-8');
 
-        // Eliminar el usuario según el ID recibido //
-        $this->service->delete($id);
-
-        // Respuesta JSON al frontend //
-        header('Content-Type: application/json');
-        echo json_encode(["message" => "Usuario eliminado correctamente"]);
-        exit;
+        $m = $_SERVER['REQUEST_METHOD'] ?? '';
+        if (!in_array($m, ['DELETE','POST'], true)) {
+            header('Allow: DELETE, POST');
+            http_response_code(405);
+            echo json_encode(['error' => 'Método no permitido']);
+            return;
+        }
+        //verificar permisos//
+        (new AuthMiddleware())->authenticate(true, ['super_adm']);
+        try {
+            $this->service->delete($id);
+            http_response_code(200);
+            echo json_encode(['status' => 200, 'message' => 'Usuario eliminado.', 'userId' => $id]);
+        } catch (UserNotFoundException) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Usuario no encontrado']);
+        }
     }
 }

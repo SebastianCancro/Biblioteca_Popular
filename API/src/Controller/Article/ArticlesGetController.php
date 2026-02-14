@@ -36,10 +36,6 @@ final readonly class ArticlesGetController {
                     $article[$key] = null;
                 }
             }
-            // Imagen por defecto //
-            if (empty($article['image'])) {
-                $article['image'] = 'placeholder.jpeg';
-            }
             return $article;
         }, $filtered);
 
@@ -76,7 +72,7 @@ final readonly class ArticlesGetController {
             $result[] = [
                 "id" => $response->id(),
                 "title" => $response->title(),
-                "image" => $response->image(),
+                "image" => $response->image() ?: null,
                 "body" => $response->body(),
                 "date" => $response->date() instanceof \DateTime 
                           ? $response->date()->format('Y-m-d H:i:s') 

@@ -1,12 +1,12 @@
 .loginPage {
   min-height: 100vh;
-  background: #FFF5B7;  
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 32px 16px;
+  background: #fff8ef;   
+  color: #4a2c2a;         
 }
-
 
 .loginPage .container {
   max-width: 420px;
@@ -15,11 +15,9 @@
   padding: 32px;
   border-radius: 16px;
   box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
-
   display: flex;
   flex-direction: column;
   gap: 20px;
-
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -28,7 +26,7 @@
   box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.25);
 }
 
-
+/* Encabezado */
 .loginPage header {
   text-align: center;
   margin-bottom: 16px;
@@ -55,16 +53,14 @@
   opacity: 0.9;
 }
 
-
 .loginPage header p,
 .loginPage header .mantine-Text-root {
-  color: #000;   
+  color: #5C4033;   
   font-size: 0.95rem;
 }
 
-
 .loginPage header a {
-  color: #000;   
+  color: #8D493A;   
   font-weight: 500;
   text-decoration: none;
   transition: color 0.3s ease;
@@ -75,14 +71,14 @@
   color: #5C4033; 
 }
 
-
+/* Formulario */
 .loginPage form {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-
+/* Error */
 .loginPage .errorMessage {
   color: #C0392B; 
   font-size: 0.9rem;
@@ -90,7 +86,7 @@
   margin-top: -8px;
 }
 
-
+/* Botones */
 .loginPage button {
   text-transform: none !important;
   font-weight: 600 !important;
@@ -104,4 +100,31 @@
   background: #5C4033 !important;
   transform: translateY(-3px);
   box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Mensajes */
+.pendingMsg {
+  background: #fff1e6;        
+  color: #4a2c2a;
+  border: 1px solid #e2c9b0;
+}
+.pendingMsg * { color: #4a2c2a; }
+
+.errorMsg {
+  background: #fdecea;        
+  color: #7a2e2a;
+  border: 1px solid #f5c6c4;
+}
+.errorMsg * { color: #7a2e2a; }
+
+.login-register-link {
+  color: #8D493A !important;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.login-register-link:hover {
+  color: #5C4033 !important;
+  text-decoration: underline;
 }

@@ -1,7 +1,5 @@
 
 .catalog-background {
-  min-height: 100vh;
-  background: #FFF5B7;                
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -119,26 +117,6 @@
 .Mui-checked { color: #8D6E63 !important; }
 
 
-.no-results {
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px dashed #C8B6A6;
-  border-radius: 12px;
-  padding: 16px;
-  color: #5C4033;
-  text-align: center;
-}
-
-
-.book-card {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  background: #fff;
-}
-.book-title { font-weight: 700; color: #5C4033; }
-.status-available { color: #2e7d32; }
-.status-unavailable { color: #9e9e9e; }
-
 
 .field-label {
   color: #5C4033;          
@@ -160,15 +138,57 @@
 }
 
 
-.select-field .MuiSelect-select {
-  padding: 12px 40px 12px 14px;  
-  color: #5C4033;
-  font-size: 0.95rem;
-}
-
 
 .select-placeholder {
   color: #7a5a4d;
   font-style: italic;
   opacity: 0.9;
+}
+
+
+
+
+.catalog-search .MuiInputBase-input {
+  color: #5C4033;
+}
+
+
+@media (min-width: 900px) {
+  .filters-checks .MuiFormControlLabel-root {
+    margin-right: 12px;
+  }
+}
+
+
+.MuiCheckbox-root.Mui-focusVisible,
+.select-field .MuiOutlinedInput-root.Mui-focused {
+  outline: 2px solid rgba(141,110,99,0.25);
+  outline-offset: 2px;
+}
+.catalog-table {
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+
+
+.catalog-table .status-available {
+  color: #2e7d32 !important;      
+  font-weight: 700 !important;
+}
+
+.catalog-table .status-unavailable {
+  color: #c62828 !important;       
+  font-weight: 700 !important;
+}
+
+.catalog-table .status-reserved {
+  color: #2e7d32 !important;        
+  font-weight: 700 !important;
+}
+
+.catalog-table .status-not-reserved {
+  color: #c62828 !important;        
+  font-weight: 600 !important;
 }

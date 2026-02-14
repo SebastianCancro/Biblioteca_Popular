@@ -1,0 +1,99 @@
+.inscription-manager-page{
+  background: linear-gradient(135deg, #f5e6d3, #fdf6f0);
+  min-height: 100vh;
+  padding: 2rem 0;
+
+}
+/*titulo*/
+.title-inscription{
+  font-weight: bold;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  color: rgb(70, 70, 70);
+  font-size: 2rem !important;
+  font-weight: bold;
+  font-style: italic;
+  text-align: left;
+  color: #5d3a00;
+  text-shadow: 0 0 5px #fff5e6, 0 0 10px #ffd699, 0 0 15px #ffb84d;
+}
+/* Contenedor */
+.crear-container {
+  margin-top: 2rem;
+}
+
+/* Botón volver */
+.volver-btn {
+  background-color: #606c38 !important;
+  color: #fefae0 !important;
+  font-weight: bold;
+  border-radius: 12px !important;
+  padding: 10px 16px !important;
+  transition: background-color 0.3s ease;
+}
+
+.volver-btn:hover {
+  background-color: #283618 !important;
+}
+/* desktop normal */
+.inscription-manager-page .table-header {
+  background-color: #5d3a00;
+}
+.inscription-manager-page .table-header th {
+  color: #fff !important;
+  font-weight: 700;
+}
+
+/* ====== Mobile ====== */
+/* Móvil: apilar label arriba y valor abajo para evitar solapamientos */
+@media (max-width: 700px) {
+  .inscription-manager-page .inscription-table thead {
+    display: none !important;
+  }
+
+  .inscription-manager-page .inscription-table,
+  .inscription-manager-page .inscription-table tbody,
+  .inscription-manager-page .inscription-table tr,
+  .inscription-manager-page .inscription-table td {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .inscription-manager-page .inscription-table tr {
+    margin: 12px 0;
+    border: 1px solid #e5d2b8;
+    border-radius: 12px;
+    background: #fffaf5;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+
+  /* Apilar */
+  .inscription-manager-page .inscription-table td {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px;
+    padding: 10px 12px !important;
+    border-bottom: 1px solid #f0e0d6;
+    white-space: normal;      /* permitir múltiples líneas */
+    word-break: break-word;   /* cortar palabras largas si hace falta */
+  }
+  .inscription-manager-page .inscription-table td:last-child {
+    border-bottom: none;
+  }
+
+  /* El label pasa a ser una línea encima */
+  .inscription-manager-page .inscription-table td::before {
+    position: static !important;
+    content: attr(data-label);
+    font-weight: 700;
+    color: #5d3a00;
+    width: auto !important;
+    margin: 0 0 2px 0;
+    white-space: normal;
+  }
+}
+

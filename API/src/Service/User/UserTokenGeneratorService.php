@@ -15,7 +15,7 @@ final readonly class UserTokenGeneratorService
     {
         $this->repository = new UserRepository();
     }
-
+    // Genera un nuevo token para el usuario y lo actualiza en el repositorio. //
     public function generate(User $user): User
     {
         $user->generateToken();

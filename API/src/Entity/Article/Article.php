@@ -8,7 +8,7 @@ final class Article {
     public function __construct(
         private readonly ?int $id,
         private string $title,
-        private string $image,
+        private ?string $image,
         private ?DateTime $date,
         private string $body,
         private bool $deleted

@@ -3,7 +3,6 @@
 namespace Src\Service\Event;
 
 use DateTime;
-use Src\Entity\Event\Event;
 use Src\Infrastructure\Repository\Event\EventRepository;
 
 final readonly class EventUpdaterService {
@@ -15,11 +14,11 @@ final readonly class EventUpdaterService {
         $this->finder = new EventFinderService();
     }
 
-    public function update(int $id, string $title, string $description, string $image, DateTime $end_date = null, bool $is_active): void
+    public function update(int $id, string $title, string $description, string $image, ?DateTime $end_date): void
     {
         $event = $this->finder->find($id);
 
-        $event->modify($title, $image, $description, $end_date, $is_active);
+        $event->modify($title, $description, $image, $end_date);
 
         $this->repository->update($event);
     }

@@ -28,93 +28,97 @@ export const ArticlePageDetail = () => {
     fetchArticle();
   }, [id]);
 
-  if (loading) {
+  if (loading || !article) {
     return (
-      <Box className="article-loading">
-        <Typography variant="h6">Cargando...</Typography>
-      </Box>
+      <main className="page-wrapper">
+        <div className="loading-container">
+          {loading ? (
+            <>
+              <div className="loading-spinner"></div>
+              <p>Cargando...</p>
+            </>
+          ) : (
+            <p>Noticia no encontrada</p>
+          )}
+        </div>
+      </main>
     );
   }
 
-  if (!article) {
-    return (
-      <Box className="article-loading">
-        <Typography variant="h6">Noticia no encontrada</Typography>
-      </Box>
-    );
-  }
-
-  const currentUrl = window.location.href;
-
+  const formatDate = (isoDate) => {
+  const date = new Date(isoDate);
+  const options = { day: "numeric", month: "long" , year: "numeric"  };
+  return date.toLocaleDateString("es-AR", options); 
+};
   return (
-    <Box className="article-detail-container">
-      {/* Texto principal */}
-      <Box className="article-detail-text">
-        <Typography className="article-detail-date">
-          📅 {article.date}
-        </Typography>
+    <main className="article-detail-wrapper">
+      <Box className="article-detail-container">
+        <Box className="article-detail-text">
+          <Typography className="article-detail-date">
+            {formatDate(article.date)}
+          </Typography>
 
-        <Typography variant="h3" className="article-detail-title">
-          {article.title}
-        </Typography>
+          <Typography variant="h3" className="article-detail-title">
+            {article.title}
+          </Typography>
 
-        <Typography variant="body1" className="article-detail-body">
-          {article.body}
-        </Typography>
-      </Box>
+          <Typography variant="body1" className="article-detail-body">
+            {article.body}
+          </Typography>
+        </Box>
 
-      {/* Imagen + botón + compartir */}
-      <Box className="article-detail-side">
-        {article.image && (
-          <Box
-            component="img"
-            src={article.image}
-            alt={article.title}
-            className="article-detail-image"
-          />
-        )}
+        <Box className="article-detail-side">
+          {article.image && (
+            <Box
+              component="img"
+              src={article.image}
+              alt={article.title}
+              className="article-detail-image"
+            />
+          )}
 
-        <Button
-          variant="contained"
-          onClick={() => navigate("/noticias")}
-          className="back-button"
-        >
-          ← Volver a noticias
-        </Button>
+          <Button
+            variant="contained"
+            onClick={() => navigate("/noticias")}
+            className="back-button"
+          >
+            ← Volver a noticias
+          </Button>
 
-        <Box className="share-section">
-          <Typography className="share-label">Compartí en Redes:</Typography>
-          <Box className="share-icons">
-            <IconButton
-              component="a"
-              href={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="share-icon facebook"
-            >
-              <FacebookIcon />
-            </IconButton>
-            <IconButton
-              component="a"
-              href={`https://twitter.com/intent/tweet?url=${currentUrl}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="share-icon twitter"
-            >
-              <TwitterIcon />
-            </IconButton>
-            <IconButton
-              component="a"
-              href={`https://api.whatsapp.com/send?text=${currentUrl}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="share-icon whatsapp"
-            >
-              <WhatsAppIcon />
-            </IconButton>
+          <Box className="share-section">
+            <Typography className="share-label">Compartí en Redes:</Typography>
+            <Box className="share-icons">
+              <IconButton
+                component="a"
+                href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="share-icon facebook"
+              >
+                <FacebookIcon />
+              </IconButton>
+              <IconButton
+                component="a"
+                href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="share-icon twitter"
+              >
+                <TwitterIcon />
+              </IconButton>
+              <IconButton
+                component="a"
+                href={`https://api.whatsapp.com/send?text=${window.location.href}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="share-icon whatsapp"
+              >
+                <WhatsAppIcon />
+              </IconButton>
+            </Box>
           </Box>
         </Box>
       </Box>
-    </Box>
+    </main>
   );
 };

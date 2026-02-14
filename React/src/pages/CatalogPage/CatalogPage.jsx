@@ -1,5 +1,5 @@
 import "./CatalogPage.css";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Container,
@@ -9,32 +9,100 @@ import {
   Grid,
   FormControlLabel,
   Checkbox,
-  MenuItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { bookService } from "../../services/bookService";
 
-const MOCK_BOOKS = [
-  { id: 1, title: "Cien años de soledad", author: "Gabriel García Márquez", category: "Novela",  available: true,  reservedCollection: false },
-  { id: 2, title: "El Principito",        author: "Antoine de Saint-Exupéry", category: "Infantil", available: false, reservedCollection: false },
-  { id: 3, title: "El Aleph",              author: "J. L. Borges",             category: "Ensayo",   available: true,  reservedCollection: true  },
-];
+
+const CACHE_KEY = "librosGuardados";
+
+const readCache = () => {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+};
+
+const writeCache = (books) => {
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify(books));
+  } catch {}
+};
+
 
 export function CatalogPage() {
+  const [books, setBooks] = useState([]);
   const [q, setQ] = useState("");
   const [author, setAuthor] = useState("");
   const [category, setCategory] = useState("");
   const [onlyAvailable, setOnlyAvailable] = useState(false);
   const [onlyReserved, setOnlyReserved] = useState(false);
 
-  const authors = useMemo(() => Array.from(new Set(MOCK_BOOKS.map(b => b.author))), []);
-  const categories = useMemo(() => Array.from(new Set(MOCK_BOOKS.map(b => b.category))), []);
+  useEffect(() => {
+    const fetchBooks = async () => {
+      
+      const cached = readCache();
+      if (cached && cached.length > 0) {
+        setBooks(cached);
+        console.log("Libros cargados desde localStorage");
+        return;
+      }
+
+     
+      try {
+        console.log(" Pidiendo al backend...");
+        const { data } = await bookService.search({});
+        if (Array.isArray(data)) {
+          setBooks(data);
+          writeCache(data); 
+        }
+      } catch (error) {
+        console.error("Error cargando libros:", error);
+      }
+    };
+
+    fetchBooks();
+  }, []);
+
+  
+  const filteredBooks = books.filter((book) => {
+    const matchesTitle = book.titulo?.toLowerCase().includes(q.toLowerCase());
+    const matchesAuthor = author
+      ? book.autor?.toLowerCase().includes(author.toLowerCase())
+      : true;
+    const matchesCategory = category
+      ? book.materia?.toLowerCase().includes(category.toLowerCase())
+      : true;
+    const matchesAvailable = onlyAvailable ? book.disponibilidad : true;
+    const matchesReserved = onlyReserved ? book.reservada : true;
+
+    return (
+      matchesTitle &&
+      matchesAuthor &&
+      matchesCategory &&
+      matchesAvailable &&
+      matchesReserved
+    );
+  });
 
   return (
     <div className="catalog-background">
       <Container maxWidth="lg" className="catalog">
-        <Typography variant="h2" className="catalog-title">Catálogo</Typography>
+        <Typography variant="h2" className="catalog-title">
+          Catálogo
+        </Typography>
 
-        {/* Buscador */}
+        {/* Buscador por título */}
         <TextField
           className="catalog-search"
           fullWidth
@@ -54,50 +122,30 @@ export function CatalogPage() {
         {/* Filtros */}
         <Box className="filters-card">
           <Grid container spacing={2} alignItems="center">
-            {/* Autor */}
-<Grid item xs={12} md={4}>
-  <div className="field-label">Autor</div>
-  <TextField
-    className="select-field"
-    select
-    fullWidth
-    variant="outlined"
-    value={author}
-    onChange={(e) => setAuthor(e.target.value)}
-    SelectProps={{ displayEmpty: true }}
-  >
-    <MenuItem value="">
-      <span className="select-placeholder">Todos los autores</span>
-    </MenuItem>
-    {authors.map((a) => (
-      <MenuItem key={a} value={a}>{a}</MenuItem>
-    ))}
-  </TextField>
-</Grid>
+            <Grid item xs={12} md={4}>
+              <div className="field-label">Autor</div>
+              <TextField
+                className="select-field"
+                variant="outlined"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+                placeholder="Buscar por autor..."
+                fullWidth
+              />
+            </Grid>
 
-{/* Categoría */}
-<Grid item xs={12} md={4}>
-  <div className="field-label">Categoría</div>
-  <TextField
-    className="select-field"
-    select
-    fullWidth
-    variant="outlined"
-    value={category}
-    onChange={(e) => setCategory(e.target.value)}
-    SelectProps={{ displayEmpty: true }}
-  >
-    <MenuItem value="">
-      <span className="select-placeholder">Todas las categorías</span>
-    </MenuItem>
-    {categories.map((c) => (
-      <MenuItem key={c} value={c}>{c}</MenuItem>
-    ))}
-  </TextField>
-</Grid>
+            <Grid item xs={12} md={4}>
+              <div className="field-label">Materia</div>
+              <TextField
+                className="select-field"
+                variant="outlined"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                placeholder="Buscar por materia..."
+                fullWidth
+              />
+            </Grid>
 
-
-            {/* Checks */}
             <Grid item xs={12} md={4} className="filters-checks">
               <FormControlLabel
                 control={
@@ -115,11 +163,71 @@ export function CatalogPage() {
                     onChange={(e) => setOnlyReserved(e.target.checked)}
                   />
                 }
-                label="Colección reservada"
+                label="Solo reservados"
               />
             </Grid>
           </Grid>
         </Box>
+
+        {/* Resultados en tabla */}
+        <TableContainer component={Paper} className="catalog-table">
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Código</TableCell>
+                <TableCell>Título</TableCell>
+                <TableCell>Autor</TableCell>
+                <TableCell>Materia</TableCell>
+                <TableCell>Editorial</TableCell>
+                <TableCell>Año</TableCell>
+                <TableCell>Disponibilidad</TableCell>
+                <TableCell>Colección Reservada</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {filteredBooks.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={8} align="center">
+                    No se encontraron resultados
+                  </TableCell>
+                </TableRow>
+              ) : (
+                filteredBooks.map((book) => (
+                  <TableRow key={book.id}>
+                    <TableCell>{book.codigo}</TableCell>
+                    <TableCell>{book.titulo}</TableCell>
+                    <TableCell>{book.autor}</TableCell>
+                    <TableCell>{book.materia}</TableCell>
+                    <TableCell>{book.editorial}</TableCell>
+                    <TableCell>{book.anio}</TableCell>
+
+                    {/* Disponible con color */}
+                    <TableCell
+                      className={
+                        book.disponibilidad
+                          ? "status-available"
+                          : "status-unavailable"
+                      }
+                    >
+                      {book.disponibilidad ? "Disponible" : "No disponible"}
+                    </TableCell>
+
+                    {/* Reservada con color */}
+                    <TableCell
+                      className={
+                        book.reservada
+                          ? "status-reserved"
+                          : "status-not-reserved"
+                      }
+                    >
+                      {book.reservada ? "Reservada" : "No reservada"}
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Container>
     </div>
   );

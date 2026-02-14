@@ -1,40 +1,120 @@
 .NavBox {
   display: flex;
-  gap: 2rem;               
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 0.2rem 0;            
+}
+.MuiAppBar-root {
+  background-color: #000000 !important;
+  box-shadow: none !important;
+  min-height: 44px !important;   
+}
+
+.MuiToolbar-root {
+  display: flex !important;
+  justify-content: center !important;
+  padding: 0.14rem 1rem !important;
+  min-height: 44px !important;
+}
+.NavButton {
+  color: #F4C16E !important;
+  background: #FFB066;
+  font-family: 'Georgia', serif;
+  font-weight: 800;                     
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  padding: 0.45rem 0.9rem;               
+  border-radius: 0 !important;                    
+  text-transform: none;
+  transition: background 0.22s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+  border: none;
+  line-height: 1;
+  min-width: 0;                         
+}
+.NavButton.MuiButton-root,
+.MuiButton-root.NavButton {
+  padding: 0.45rem 0.9rem !important;
+  font-weight: 800 !important;
+  min-width: 0 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12) !important;
+}
+.NavButton:hover,
+.NavButton.MuiButton-root:hover {
+  background: #F4A35E !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.18) !important;
+}
+.NavButton.active,
+.NavButton.MuiButton-root.active {
+  background: #fff !important;
+  color: #D87A2E !important;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.22) !important;
+}
+.NavButton, .NavButton .MuiButton-label {
+  line-height: 1 !important;
+  vertical-align: middle;
+}
+
+@media (max-width: 600px) {
+  .NavBox {
+    gap: 1rem;
+    padding: 0.12rem 0;
+  }
+
+  .NavButton {
+    font-size: 1rem;
+    padding: 0.5rem 0.8rem;
+    width: 100%;
+    text-align: center;
+    box-shadow: none;
+  }
+
+  .NavButton.MuiButton-root {
+    width: 100% !important;
+  }
+
+  .MuiToolbar-root {
+    padding: 0.12rem 0.6rem !important;
+    min-height: 48px !important; 
+  }
+}
+/*.NavBox {
+  display: flex;
+  gap: 2rem;  
   justify-content: center;  
   align-items: center;      
   flex-wrap: wrap;          
-  margin: 0 auto;           
+  margin: 0 auto;  
+  padding: 0.25rem 0;
 }
-
-/* Botones */
 .NavButton {
-  color: #F4C16E !important;          
-  background: #FFB066;                 
-  font-family: 'Georgia', serif;       
+  color: #F4C16E !important;
+  background: #FFB066;
+  font-family: 'Georgia', serif;
   font-weight: 700;
-  font-size: clamp(1rem, 1.5vw, 1.2rem); 
-  padding: 0.8rem 1.5rem;             
-  border-radius: 10px;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  padding: 0.8rem 1.5rem;
   text-transform: none;
   transition: all 0.3s ease;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-  border: 2px solid #FFE0B2;           /
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
 .NavButton:hover {
   background: #F4A35E;                 
-  color: #fff;
+  color: #fff !important;
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.25);
 }
 
-/* Botón activo */
+
 .NavButton.active {
-  background: #F4C16E;                  
+  background: white;                  
   color: #D87A2E !important;            
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  border: 2px solid #FFE0B2;            
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);          
 }
 
 
@@ -61,3 +141,4 @@
     text-align: center;
   }
 }
+*/

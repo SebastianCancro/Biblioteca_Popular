@@ -1,0 +1,180 @@
+{
+  "books": [
+    {
+      "codigo": "TEC-009",
+      "materia": "Tecnología",
+      "titulo": "Clean Code",
+      "autor": "Robert C. Martin",
+      "editorial": "Prentice Hall",
+      "edicion": "1a ed.",
+      "anio": 2008,
+      "disponibilidad": 1,
+      "reservada": 0
+    },
+    {
+      "codigo": "TEC-010",
+      "materia": "Informática",
+      "titulo": "The Pragmatic Programmer",
+      "autor": "Andrew Hunt y David Thomas",
+      "editorial": "Addison-Wesley",
+      "edicion": "20th Anniversary Edition",
+      "anio": 2019,
+      "disponibilidad": 1,
+      "reservada": 0
+    },
+    {
+      "codigo": "LIT-011",
+      "materia": "Literatura",
+      "titulo": "Don Quijote de la Mancha",
+      "autor": "Miguel de Cervantes",
+      "editorial": "Real Academia Española",
+      "edicion": "Edición conmemorativa",
+      "anio": 2005,
+      "disponibilidad": 1,
+      "reservada": 0
+    },
+    {
+      "codigo": "LIT-012",
+      "materia": "Literatura",
+      "titulo": "La sombra del viento",
+      "autor": "Carlos Ruiz Zafón",
+      "editorial": "Planeta",
+      "edicion": "1a ed.",
+      "anio": 2001,
+      "disponibilidad": 1,
+      "reservada": 0
+    },
+    {
+      "codigo": "HIS-013",
+      "materia": "Historia",
+      "titulo": "Los mitos de la historia argentina",
+      "autor": "Felipe Pigna",
+      "editorial": "Planeta",
+      "edicion": "1a ed.",
+      "anio": 2004,
+      "disponibilidad": 1,
+      "reservada": 0
+    },
+    {
+      "codigo": "FIL-014",
+      "materia": "Filosofía",
+      "titulo": "Crítica de la razón pura",
+      "autor": "Immanuel Kant",
+      "editorial": "Alianza Editorial",
+      "edicion": "2a ed.",
+      "anio": 1781,
+      "disponibilidad": 1,
+      "reservada": 0
+    },
+    {
+      "codigo": "FIL-015",
+      "materia": "Filosofía",
+      "titulo": "El contrato social",
+      "autor": "Jean-Jacques Rousseau",
+      "editorial": "Gredos",
+      "edicion": "1a ed.",
+      "anio": 1762,
+      "disponibilidad": 1,
+      "reservada": 0
+    },
+    {
+      "codigo": "CIE-016",
+      "materia": "Ciencia",
+      "titulo": "El gen egoísta",
+      "autor": "Richard Dawkins",
+      "editorial": "Oxford University Press",
+      "edicion": "40th Anniversary Edition",
+      "anio": 2016,
+      "disponibilidad": 1,
+      "reservada": 0
+    },
+    {
+      "codigo": "CIE-017",
+      "materia": "Ciencia",
+      "titulo": "El origen de las especies",
+      "autor": "Charles Darwin",
+      "editorial": "John Murray",
+      "edicion": "1a ed.",
+      "anio": 1859,
+      "disponibilidad": 1,
+      "reservada": 0
+    },
+    {
+      "codigo": "ENS-018",
+      "materia": "Ensayo",
+      "titulo": "Meditaciones",
+      "autor": "Marco Aurelio",
+      "editorial": "Gredos",
+      "edicion": "1a ed.",
+      "anio": 180,
+      "disponibilidad": 1,
+      "reservada": 0
+    },
+    {
+      "codigo": "POL-019",
+      "materia": "Política",
+      "titulo": "El Príncipe",
+      "autor": "Nicolás Maquiavelo",
+      "editorial": "Penguin Classics",
+      "edicion": "1a ed.",
+      "anio": 1532,
+      "disponibilidad": 0,
+      "reservada": 0
+    },
+    {
+      "codigo": "SOC-020",
+      "materia": "Sociología",
+      "titulo": "La sociedad del cansancio",
+      "autor": "Byung-Chul Han",
+      "editorial": "Herder",
+      "edicion": "1a ed.",
+      "anio": 2010,
+      "disponibilidad": 1,
+      "reservada": 0
+    },
+    {
+      "codigo": "BIO-021",
+      "materia": "Biografía",
+      "titulo": "Steve Jobs",
+      "autor": "Walter Isaacson",
+      "editorial": "Simon & Schuster",
+      "edicion": "1a ed.",
+      "anio": 2011,
+      "disponibilidad": 1,
+      "reservada": 0
+    },
+        {
+      "codigo": "BIO-022",
+      "materia": "Biografía",
+      "titulo": "Steve Jobs",
+      "autor": "Walter Isaacson",
+      "editorial": "Simon & Schuster segunda editorial",
+      "edicion": "1a ed.",
+      "anio": 2016,
+      "disponibilidad": 0,
+      "reservada": 0
+    },
+    {
+      "codigo": "PSI-022",
+      "materia": "Psicología",
+      "titulo": "El hombre en busca de sentido",
+      "autor": "Viktor Frankl",
+      "editorial": "Herder",
+      "edicion": "1a ed.",
+      "anio": 1946,
+      "disponibilidad": 1,
+      "reservada": 0
+    },
+    {
+      "codigo": "ECO-023",
+      "materia": "Economía",
+      "titulo": "El capital en el siglo XXI",
+      "autor": "Thomas Piketty",
+      "editorial": "Fondo de Cultura Económica",
+      "edicion": "1a ed.",
+      "anio": 2013,
+      "disponibilidad": 1,
+      "reservada": 0
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Src\Service\User;
 
-use Src\Entity\User\User;
 use Src\Infrastructure\Repository\User\UserRepository;
+use Src\Entity\User\User;
+use Src\Entity\User\Exception\UserNotFoundException;
 
 final readonly class UserFinderByEmailService
 {
@@ -15,9 +15,13 @@ final readonly class UserFinderByEmailService
     {
         $this->repository = new UserRepository();
     }
-
-    public function find(string $email): ?User
+    // Busca un usuario por su email y lo devuelve. //
+    public function find(string $email): User
     {
-        return $this->repository->findByEmail($email);
+        $user = $this->repository->findByEmail($email);
+        if (!$user) {
+            throw new UserNotFoundException($email);
+        }
+        return $user;
     }
 }

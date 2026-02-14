@@ -1,17 +1,30 @@
 /* CONTENEDOR: 3 columnas centradas, responsive */
 .event-page {
-  min-height: 100vh;
   width: 100%;
-  background: #FFF5B7;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #5C4033;
-
   display: grid;
   grid-template-columns: repeat(3, 320px); /* ← 3 por fila, ancho controlado */
   justify-content: center;                 /* centra el grid */
   gap: 18px 24px;
   padding: 24px 16px;
 }
+.event-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.page-wrapper {
+  min-height: 78.8vh !important;       
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;     
+}
+
 
 /* 2 columnas en tablets/medianas */
 @media (max-width: 1100px) {
@@ -104,4 +117,17 @@
   .event-Card button {
     width: 100%;
   }
+}
+
+.event-image-placeholder {
+  width: 100%;
+  height: 180px;
+  border-radius: 8px;
+  background-color: #f3f3f3;
+  color: #8b5e34;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  font-weight: 500;
 }

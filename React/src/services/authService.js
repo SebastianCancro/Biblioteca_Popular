@@ -1,28 +1,31 @@
+// src/services/authService.js
 import { api } from "./api";
 
 export const authService = {
-
   // Login de usuario //
-  login: async (data) => {
-    const res = await api.post("/users/login", data, {
-      headers: { "Content-Type": "application/json" },
-    });
+  login: (email, password) =>
+    api
+      .post("/users/login", { email, password }, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((res) => res.data),
 
-    console.log("Respuesta login:", res.data); 
+  // Registro de usuario //
+  register: (payload) =>
+    api
+      .post("/users/register", payload, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((res) => res.data),
 
-    if (res.data.user?.token) {
-      localStorage.setItem("token", res.data.user.token);
-    }
-    if (res.data.user?.role) {
-      localStorage.setItem("role", res.data.user.role.toLowerCase()); 
-    }
+  me: () => api.get("/me").then((res) => res.data),
 
-    return res;
+  // Cerrar sesion //
+  logout: () => {
+    try {
+      localStorage.removeItem("token");
+      localStorage.removeItem("role");
+    } catch {}
+    return Promise.resolve({ ok: true });
   },
- // Registro de usuario //
-  register: (data) =>
-    api.post("/users/register", data, {
-      headers: { "Content-Type": "application/json" },
-    }),
-
 };

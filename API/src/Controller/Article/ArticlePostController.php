@@ -1,5 +1,6 @@
 <?php
 
+use Src\Entity\User\Exception\UserIsNotAuthorizedException;
 use Src\Middleware\AuthMiddleware;
 use Src\Utils\ControllerUtils;
 use Src\Service\Article\ArticleCreatorService;
@@ -34,13 +35,18 @@ final readonly class ArticlePostController {
                 "message" => "Artículo creado correctamente",
                 "title"   => $title
             ]);
-        } catch (Exception $e) {
-            // Manejar error //
+        }
+        // Manejar errores //
+
+        catch (UserIsNotAuthorizedException $e) {     
+                header('Content-Type: application/json');
+                http_response_code(401);
+                echo json_encode(["error" => $e->getMessage()]);
+        } 
+        catch (Throwable $e) {
             header('Content-Type: application/json');
             http_response_code(500);
             echo json_encode(["error" => $e->getMessage()]);
         }
-
-        exit;
     }
 }

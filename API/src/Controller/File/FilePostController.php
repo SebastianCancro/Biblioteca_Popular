@@ -1,5 +1,6 @@
 <?php 
 
+use Src\Entity\User\Exception\UserIsNotAuthorizedException;
 use Src\Middleware\AuthMiddleware;
 use src\Utils\ControllerUtils;
 use Src\Service\File\FileUploaderService;
@@ -40,9 +41,15 @@ final readonly class FilePostController {
                 "size" => $uploadedFile->size(),
                 "type" => $uploadedFile->type(),
             ]);
+        }
+        // Manejar errores //
 
-        } catch (Exception $e) {
-            // Manejar error //
+        catch (UserIsNotAuthorizedException $e) {     
+                header('Content-Type: application/json');
+                http_response_code(401);
+                echo json_encode(["error" => $e->getMessage()]);
+        } 
+        catch (Throwable $e) {
             header('Content-Type: application/json');
             http_response_code(500);
             echo json_encode(["error" => $e->getMessage()]);

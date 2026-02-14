@@ -16,7 +16,7 @@ final readonly class ArticleGetController {
         echo json_encode([
             "id" => $article->id(),
             "title" => $article->title(),
-            "image" => $article->image(),
+            "image" => $article->image() ?: null,
             "body" => $article->body(),
             "date" => $article->date()->format('Y-m-d H:i:s')
         ], true);

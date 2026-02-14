@@ -1,11 +1,13 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Src\Middleware;
 
 use Src\Service\User\UserTokenValidatorService;
-use Exception;
+use Src\Entity\User\Exception\UserInvalidCredentialsException; // 401
+use Src\Entity\User\Exception\UserPendingApprovalException; // 403
+use Src\Entity\User\Exception\UserIsNotAuthorizedException;// 403
+use Src\Entity\User\Exception\UserBlockedException; // 403
 
 final class AuthMiddleware
 {
@@ -17,38 +19,35 @@ final class AuthMiddleware
     }
     public function authenticate(bool $required = true, array $roles = []): int
     {
-        // busca el token que viene del header //
         $token = $_SERVER['HTTP_X_API_KEY'] ?? null;
 
-        // si el endpoint pide token y no hay, tira error //
-        if ($required && !$token) {
-            throw new Exception("Token requerido para acceder a este recurso.");
-        }
-
-        // si el endpoint es público y no vino token, dejamos seguir como visitante) //
+        // Ruta publica: si no hay token y no es requerido, dejamos pasar como invitado (id=0) //
         if (!$required && !$token) {
             return 0;
         }
+        // Ruta protegida, falta token //
+        if ($required && !$token) {
+            throw new UserInvalidCredentialsException('Falta X-API-KEY.');
+        }
 
-        // valida el token //
-        $user = $this->validator->validate($token);
-
-        // si no encuentra usuario o el token está vencido, lanza error //
+        // Valida token, obtener usuario //
+        $user = $this->validator->validate((string)$token);
         if (!$user) {
-            throw new Exception("Token inválido o expirado.");
+            throw new UserInvalidCredentialsException('Token inválido o expirado.');
         }
-
-        // si el usuario todavía no fue activado (pendiente de aprobación) //
+        // Estado de cuenta //
+        if ($user->is_blocked()) {
+            // usa el mensaje por defecto unificado//
+            throw new UserBlockedException(); // Usuario bloqueado por varios intentos fallidos //
+        }
         if (!$user->is_active()) {
-            throw new Exception("Usuario inactivo. Debe ser aprobado por un administrador.");
+            throw new UserPendingApprovalException('Usuario inactivo. Debe ser aprobado por un administrador.');
         }
-
-        // si se pasaron roles y el usuario no está en la lista, tira error //
+         // Autorizacion por rol //
         if (!empty($roles) && !in_array($user->role(), $roles, true)) {
-            throw new Exception("Acceso denegado: rol no autorizado ({$user->role()}).");
+            throw new UserIsNotAuthorizedException('Acceso denegado: rol no autorizado.');
         }
 
-        // si todo ok devuelve el id del usuario logueado //
-        return $user->id();
+        return (int) $user->id();
     }
 }

@@ -1,104 +1,108 @@
 <?php 
 
-final readonly class UserRoutes {
-    public static function getRoutes(): array {
+declare(strict_types=1);
+
+final readonly class UserRoutes
+{
+    public static function getRoutes(): array
+    {
         return [
-            // Login, solo usuarios activos pueden loguearse //
+            // Login (solo usuarios activos pueden loguearse) //
             [
-                "name" => "user_login",
-                "url" => "/users/login",
-                "controller" => "User/UserLoginController.php",
-                "method" => "POST"
+                'name'=> 'user_login',
+                'url' => '/users/login',
+                'controller'=> 'User/UserLoginController.php',
+                'method'=> 'POST',
             ],
 
-            // Registro, cualquier persona se registra, queda pendiente //
+            // Registro (queda pendiente)//
             [
-                "name" => "user_register",
-                "url" => "/users/register",
-                "controller" => "User/UserRegisterController.php",
-                "method" => "POST"
+                'name'=> 'user_register',
+                'url'=> '/users/register',
+                'controller'=> 'User/UserRegisterController.php',
+                'method'=> 'POST',
             ],
 
-            // Lista usuarios activos //
+            // Listas //
             [
-                "name" => "user_list_active",
-                "url" => "/users/active",
-                "controller" => "User/UserListActiveController.php",
-                "method" => "GET"
+                'name'=> 'user_list_active',
+                'url' => '/users/active',
+                'controller'=> 'User/UserListActiveController.php',
+                'method'=> 'GET',
+            ],
+            [
+                'name' => 'user_list_pending',
+                'url'=> '/users/pending',
+                'controller' => 'User/UserListPendingController.php',
+                'method'=> 'GET',
+            ],
+            [
+                'name'=> 'user_list_blocked',
+                'url'=> '/users/blocked',
+                'controller' => 'User/UserListBlockedController.php',
+                'method'=> 'GET',
             ],
 
-            // Lista usuarios pendientes //
+            // Buscar por email //
             [
-                "name" => "user_list_pending",
-                "url" => "/users/pending",
-                "controller" => "User/UserListPendingController.php",
-                "method" => "GET"
+                'name'=> 'user_search_by_email',
+                'url'=> '/users/search/{email}',
+                'controller' => 'User/UserSearchByEmailController.php',
+                'method'=> 'GET',
+                'parameters' => [
+                    ['name' => 'email', 'type' => 'string'],
+                ],
             ],
 
-            // Obtener usuario por id //
+            // Obtener por id //
             [
-                "name" => "user_get",
-                "url" => "/users/{id}",
-                "controller" => "User/UserGetController.php",
-                "method" => "GET",
-                "parameters" => [
-                    ["name" => "id", "type" => "int"]
-                ]
+                'name' => 'user_get',
+                'url' => '/users/{id}',
+                'controller' => 'User/UserGetController.php',
+                'method'=> 'GET',
+                'parameters'=> [
+                    ['name'=> 'id', 'type' => 'int'],
+                ],
+            ],
+            // Actualizar //
+            [
+                'name'=> 'user_update',
+                'url'=> '/users/{id}',
+                'controller' => 'User/UserUpdateController.php',
+                'method'=> 'PUT',
+                'parameters' => [
+                    ['name' => 'id', 'type' => 'int'],
+                ],
             ],
 
-            // Actualizar usuario //
+            // Eliminar//
             [
-                "name" => "user_update",
-                "url" => "/users/{id}",
-                "controller" => "User/UserUpdateController.php",
-                "method" => "PUT",
-                "parameters" => [
-                    ["name" => "id", "type" => "int"]
-                ]
+                'name' => 'user_delete',
+                'url'=> '/users/{id}',
+                'controller' => 'User/UserDeleteController.php',
+                'method' => 'DELETE',
+                'parameters' => [
+                    ['name' => 'id', 'type' => 'int'],
+                ],
             ],
 
-            // Eliminar usuario //
+            // Aprobar (visitor -> admin + activar) //
             [
-                "name" => "user_delete",
-                "url" => "/users/{id}",
-                "controller" => "User/UserDeleteController.php",
-                "method" => "DELETE",
-                "parameters" => [
-                    ["name" => "id", "type" => "int"]
-                ]
+                'name'=> 'user_approve',
+                'url' => '/users/approve/{id}',
+                'controller' => 'User/UserApproveController.php',
+                'method' => 'PUT',
+                'parameters' => [
+                    ['name' => 'id', 'type' => 'int'],
+                ],
             ],
 
-            // Aprobar usuario pendiente solo super_adm //
+            // Verificar token //
             [
-                "name" => "user_approve",
-                "url" => "/users/approve/{id}", 
-                "controller" => "User/UserApproveController.php",
-                "method" => "PUT",
-                "parameters" => [
-                    ["name" => "id", "type" => "int"] 
-                ]
-            ],
-
-            // Buscar usuario por email //
-            [
-                "name" => "user_search_by_email",
-                "url" => "/users/search/{email}",
-                "controller" => "User/UserSearchByEmailController.php",
-                "method" => "GET",
-                "parameters" => [
-                    ["name" => "email", "type" => "string"]
-                ]
-            ],
-
-            // Promover usuario a admin //
-            [
-                "name" => "user_promote_admin",
-                "url" => "/users/promote/{id}",
-                "controller" => "User/UserAuthorizeAdminController.php",
-                "method" => "PUT",
-                "parameters" => [
-                    ["name" => "id", "type" => "int"]
-                ]
+                'name'=> 'user_verify',
+                'url' => '/users/verify',
+                'controller' => 'User/UserVerifyController.php',
+                'method'=> 'GET',
             ],
         ];
     }

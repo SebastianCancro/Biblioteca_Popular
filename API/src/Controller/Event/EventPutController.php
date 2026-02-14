@@ -4,27 +4,38 @@ use Src\Middleware\AuthMiddleware;
 use Src\Utils\ControllerUtils;
 use Src\Service\Event\EventUpdaterService;
 
-final readonly class EventPutController extends AuthMiddleware {
+final readonly class EventPutController {
     private EventUpdaterService $service;
+    private AuthMiddleware $auth;
 
     public function __construct() {
-        parent::__construct();
+        // Inicializamos los servicios //
         $this->service = new EventUpdaterService();
+        $this->auth = new AuthMiddleware();
     }
 
     public function start(int $id): void
-{
-    $title = ControllerUtils::getPost("title");
-    $description = ControllerUtils::getPost("description");
-    $image = ControllerUtils::getPost("image");
+    {
+        try {
+            $this->auth->authenticate(true);
 
-    $end_date_str = ControllerUtils::getPost("end_date");
-    $end_date = $end_date_str ? new DateTime($end_date_str) : null;
+            $title = ControllerUtils::getPost("title");
+            $description = ControllerUtils::getPost("description");
+            $image  = ControllerUtils::getPost("image");
+            $end_date_str  = ControllerUtils::getPost("end_date");
+            $end_date = !empty($end_date_str) ? new \DateTime($end_date_str) : null;
 
-    $is_active_raw = ControllerUtils::getPost("is_active");
-    $is_active = $is_active_raw === "1";
+            $this->service->update($id, $title, $description, $image, $end_date);
 
-    $this->service->update($id, $title, $description, $image, $end_date, $is_active);
-}
+            header('Content-Type: application/json');
+            http_response_code(200);
+            echo json_encode(["message" => "Evento actualizado correctamente"]);
+        } catch (Exception $e) {
+            header('Content-Type: application/json');
+            http_response_code(500);
+            echo json_encode(["error" => $e->getMessage()]);
+        }
 
+        exit;
+    }
 }

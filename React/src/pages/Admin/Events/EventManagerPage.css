@@ -1,0 +1,197 @@
+/* Fondo general */
+.event-manager-page {
+  background: linear-gradient(135deg, #f5e6d3, #fdf6f0);
+  min-height: 100vh;
+  padding: 2rem 0;
+  margin: 0;
+  gap: 2rem;
+}
+
+/* Header */
+.container {
+  margin-top: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  color: rgb(70, 70, 70);
+  font-size: 2rem !important;
+  font-weight: bold;
+  font-style: italic;
+  text-align: left;
+  color: #5d3a00;
+  text-shadow: 0 0 5px #fff5e6, 0 0 10px #ffd699, 0 0 15px #ffb84d;
+}
+
+.header h4 {
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Botón Crear */
+.create-button {
+  background-color: #606c38 !important;
+  color: #fefae0 !important;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 20px 20px !important;
+  border-radius: 12px !important;
+  transition: background-color 0.3s ease;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 0 !important;
+  line-height: 1 !important;
+}
+
+.create-button:hover {
+  background-color: #283618 !important;
+}
+
+/* Tabla */
+.loading {
+  color: #5d3a00;
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.table-header {
+  background-color: #5d3a00;
+}
+
+.table-header th {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.table-row {
+  background-color: #fffaf5;
+  transition: all 0.3s ease;
+}
+
+.table-row-title {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-row:hover {
+  background-color: #f0e0d6;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-container {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button {
+  color: #8b5e34 !important;
+}
+
+/* Estilos del modal */
+.edit-event-dialog .MuiDialog-paper {
+  border-radius: 16px !important;
+  padding: 1rem !important;
+}
+
+.edit-event-dialog .MuiDialogTitle-root {
+  font-weight: bold;
+  color: #283618;
+}
+
+.edit-image-btn {
+  border: 2px dashed #ccc !important;
+  color: #606c38 !important;
+  width: 12rem !important;
+  font-weight: bold !important;
+  border-radius: 12px !important;
+  background-color: #fefae0 !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Inputs */
+#edit-title,
+#edit-description,
+#edit-end_date {
+  background-color: #fff !important;
+  color: #283618 !important;
+  border-radius: 8px;
+}
+
+/* Preview imagen */
+.preview-imagen {
+  border: 1px dashed #ccc;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  background-color: #fafafa;
+}
+
+.preview-imagen img {
+  border-radius: 8px;
+  max-height: 220px;
+  object-fit: cover;
+}
+
+/* Vista teléfono */
+@media (max-width: 600px) {
+  .create-button.MuiButton-root,
+  .create-button.MuiButton-contained {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 45% !important;
+    padding: 0 !important;
+    min-width: 50px !important;
+    min-height: 50px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .create-button .texto {
+    display: none !important;
+  }
+
+  .create-button::after {
+    content: "+";
+    display: inline-block;
+    font-weight: bold;
+    color: #fefae0;
+  }
+}
+
+/* Botones del modal */
+.edit-event-dialog .MuiInputLabel-root {
+  color: #606c38 !important;
+  font-weight: 600 !important;
+}
+
+.edit-event-dialog .MuiDialogActions-root {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.edit-event-dialog .MuiDialogActions-root button {
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 8px 20px;
+}
+
+.edit-event-dialog .MuiDialogActions-root button:last-of-type {
+  background-color: #606c38 !important;
+  color: #fefae0 !important;
+}
+
+.edit-event-dialog .MuiDialogActions-root button:last-of-type:hover {
+  background-color: #283618 !important;
+}

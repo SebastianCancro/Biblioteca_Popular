@@ -13,9 +13,9 @@ final readonly class EventCreatorService {
         $this->repository = new EventRepository();
     }
     
-public function create(string $title, string $description, string $image, ?DateTime $end_date = null, bool $is_active = true): void
+public function create(string $title, string $description, string $image, ?DateTime $end_date): void
 {
-    $event = Event::create($title, $description, $image, $end_date, $is_active);
+    $event = Event::create($title, $description, $image, $end_date);
     $this->repository->insert($event);
 }
 

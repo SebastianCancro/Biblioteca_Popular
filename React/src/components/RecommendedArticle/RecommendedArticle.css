@@ -1,0 +1,37 @@
+.recommended-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.recommended-item:hover {
+  background-color: #f5f5f5;
+}
+
+.recommended-thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.recommended-info {
+  flex: 1;
+}
+
+.recommended-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.recommended-date {
+  font-size: 0.85rem;
+  color: #777;
+  margin: 4px 0 0;
+}

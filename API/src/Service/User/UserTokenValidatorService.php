@@ -16,12 +16,12 @@ final readonly class UserTokenValidatorService
     {
         $this->repository = new UserRepository();
     }
-
+    // Valida el token de un usuario y devuelve el usuario asociado si es valido. //
     public function validate(string $token): User
     {
         $user = $this->repository->findByToken($token);
-
-        if ($user === null || !$user->is_active()) {
+        // Verificar si el usuario existe y su estado //
+        if ($user === null || !$user->is_active() || $user->is_blocked()) {
             throw new UserIsNotAuthorizedException();
         }
 

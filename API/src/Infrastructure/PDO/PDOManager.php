@@ -13,6 +13,11 @@ readonly class PDOManager {
 		$this->client = $client->connect();
 	}
 
+	protected function getConnection(): PDO
+	{
+		return $this->client;
+	}
+
 	public function execute(
 		string $query,
 		array $parameters = []

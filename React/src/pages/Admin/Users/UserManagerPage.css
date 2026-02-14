@@ -1,4 +1,4 @@
-/*Fondo general*/
+/*Fondo general */
 .user-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #f5e6d3, #fdf6f0);
@@ -6,49 +6,66 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  overflow-x: hidden;
 }
-
-/*Título*/
+.user-container--lg {
+  max-width: 1280px;
+  margin: 0 auto;
+}
 .user-title {
   font-size: 2rem !important;
   font-weight: bold;
   font-style: italic;
   text-align: center;
   color: #5d3a00;
-  text-shadow: 0 0 5px #fff5e6, 0 0 10px #ffd699, 0 0 15px #ffb84d;
+  text-shadow: 0 0 5px #fffaf2, 0 0 10px #ffd699, 0 0 15px #ffb84d;
 }
-
-/*Pestañas*/
 .tab-menu {
   display: flex;
   justify-content: center;
   gap: 1rem;
 }
+/* Boton de pestaña */
 .tab-btn {
-  background-color: #fffaf5 !important;
+  background-color: #fffaf2 !important;
   color: #5d3a00 !important;
-  border-radius: 8px !important;
+  border-radius: 12px !important;
   font-weight: bold !important;
-  padding: 0.5rem 1.5rem !important;
+  padding: 10px 20px !important; 
+  min-height: 44px;
   box-shadow: 0 2px 8px rgba(139, 69, 19, 0.2);
-  transition: all 0.3s ease;
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 150ms ease !important;
 }
 .tab-btn:hover {
   background-color: #f0e0d6 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(139, 69, 19, 0.28);
 }
+/* Estado activo */
 .tab-active {
   background-color: #8b5e34 !important;
   color: #fff !important;
   box-shadow: 0 4px 12px rgba(139, 69, 19, 0.4);
-  transform: scale(1.05);
+  transform: translateY(-1px);
 }
 
-/*Tablas*/
+.tab-lg { padding: 12px 24px !important; min-height: 48px; }
+
 .user-table-container {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2);
 }
+
+.hover-zoom {
+  transition: transform 150ms ease, box-shadow 200ms ease;
+  will-change: transform;
+}
+.hover-zoom:hover {
+  transform: scale(1.01);
+  box-shadow: 0 10px 30px rgba(139, 69, 19, 0.25);
+}
+/* Encabezado de tabla */
 .user-table-header {
   background-color: #5d3a00;
 }
@@ -56,32 +73,54 @@
   color: #fff !important;
   font-weight: bold;
 }
+
+.user-table--lg .MuiTableCell-root {
+  padding: 14px 16px;
+  font-size: 0.95rem;
+}
+/* Filas y hover */
 .user-row {
-  background-color: #fffaf5;
-  transition: all 0.3s ease;
+  background-color: #fffaf2;
+  transition: background-color 120ms ease;
 }
-.user-row:hover {
+.row-hover:hover {
   background-color: #f0e0d6;
-  transform: scale(1.01);
+}
+/*(editar / eliminar / aprobar / rechazar)*/
+.user-row .MuiIconButton-root {
+  margin: 0 4px;
+  transition: transform 100ms ease, filter 100ms ease, box-shadow 100ms ease;
 }
 
-/*Botones*/
-.btn-edit {
-  color: #8b5e34 !important;
+.btn-icon-lg .MuiSvgIcon-root {
+  font-size: 1.35rem;
 }
-.btn-delete {
-  color: #d32f2f !important;
+.btn-icon-lg:hover,
+.user-row .MuiIconButton-root:hover {
+  transform: translateY(-1px) scale(1.06);
+  filter: brightness(1.06);
 }
-.btn-back {
-  background-color: #8b5e34 !important;
+.btn-edit { color: #8b5e34 !important; }
+.btn-edit:hover { color: #b37645 !important; cursor: pointer; }
+
+.btn-delete { color: #d32f2f !important; }
+.btn-delete:hover { color: #ff4c4c !important; cursor: pointer; }
+
+.btn-approve { color: #2e7d32 !important; }
+.btn-approve:hover { color: #4caf50 !important; cursor: pointer; }
+
+.btn-reject { color: #b71c1c !important; }
+.btn-reject:hover { color: #ef5350 !important; cursor: pointer; }
+
+.MuiTooltip-tooltip {
+  background-color: #5d3a00 !important;
   color: #fff !important;
+  font-size: 0.9rem !important;
   font-weight: bold !important;
-  margin-bottom: 1rem !important;
-  border-radius: 8px !important;
-  padding: 0.4rem 1rem !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25) !important;
 }
-
-/*Cartel de restricción*/
+/*Cartel de restricción */
 .restriction-container {
   min-height: 100vh;
   display: flex;
@@ -100,4 +139,15 @@
   padding: 1.5rem 2rem !important;
   box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3) !important;
   text-align: center;
+}
+.user-alert,
+.user-alert--success,
+.user-alert--info,
+.user-alert--error {
+  background-color: #fffaf2 !important; 
+  color: #5d3a00 !important;              
+  border: 2px solid #8b5e34 !important;   
+}
+.user-alert .MuiAlert-icon {
+  color: #8b5e34 !important;
 }

@@ -15,4 +15,5 @@ interface EventRepositoryInterface {
 
     public function insert(Event $event): void;
     public function update(Event $event): void;
+    public function searchWithCounts(): array;
 }

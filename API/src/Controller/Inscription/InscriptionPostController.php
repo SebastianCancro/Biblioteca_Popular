@@ -16,7 +16,10 @@ final readonly class InscriptionPostController {
         $surname = ControllerUtils::getPost("surname");
         $email = ControllerUtils::getPost("email");
         $phone = ControllerUtils::getPost("phone");
+        $idEvent = ControllerUtils::getPost("id_event");
 
-        $this->service->create($name, $surname, $email, $phone);
+        $this->service->create($name, $surname, $email, $phone, (int) $idEvent);
+
+
     }
 }

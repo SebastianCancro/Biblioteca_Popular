@@ -18,7 +18,7 @@ final readonly class EventGetController {
             "title" => $event->title(),
             "description" => $event->description(),
             "image" => $event->image(),
-            "end_date" => $event->endDate()->format('Y-m-d H:i:s')
+            "end_date" => $event->endDate()->format('Y-m-d')
         ], true);
 
         exit;

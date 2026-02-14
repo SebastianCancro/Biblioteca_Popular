@@ -12,9 +12,10 @@ final readonly class InscriptionCreatorService {
         $this->repository = new InscriptionRepository();
     }
 
-    public function create(string $name, string $surname, string $email, int $phone): void
-    {
-        $inscription = Inscription::create($name, $surname, $email, $phone);
-        $this->repository->insert($inscription);
-    }
+    public function create(string $name, string $surname, string $email, int $phone, int $idEvent): void
+{
+    $inscription = Inscription::create($name, $surname, $email, $phone, $idEvent);
+    $this->repository->insert($inscription);
+}
+
 }

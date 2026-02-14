@@ -9,8 +9,8 @@ import { PrivateRoute, PublicRoute } from "./Routes";
 
 import Header from "./components/Header/Header";
 import NavBar from './components/NavBar/NavBar';
-import Banner from "./components/Banner/Banner";
 import Footer from "./components/Footer/Footer";
+import { HomePage } from "./pages/HomePage/HomePage";
 import InfoNosotros from './components/InfoNosotros/InfoNosotros';
 import { DonationsPage } from "./pages/DonationsPage/DonationsPage";
 import Questions from './components/Questions/Questions';
@@ -23,17 +23,21 @@ import { CatalogPage } from "./pages/CatalogPage/CatalogPage";
 import EventPage from "./pages/EventPage/EventPage";
 import { AdminHomePage } from "./pages/Admin/Home/AdminHomePage";
 import { EventManagerPage } from "./pages/Admin/Events/EventManagerPage";
+import { InscriptionManagerPage } from "./pages/Admin/Events/InscriptionManagerPage";
 
 // CORRECCIÓN: default import para UserManagerPage
 import UserManagerPage from "./pages/Admin/Users/UserManagerPage";
+import { EventCreationPage } from "./pages/Admin/Events/EventCreationPage";
 
 const MainLayout = () => (
-  <>
+  <div className="layout-container">
     <Header />
     <NavBar />
-    <Outlet />
+    <main className="main-content">
+      <Outlet />
+    </main>
     <Footer />
-  </>
+  </div>
 );
 
 function App() {
@@ -44,11 +48,11 @@ function App() {
 
           {/* Rutas con la barra de navegación estándar */}
           <Route element={<MainLayout />}>
-            <Route path='/' element={<><Banner/></>} />
+            <Route path='/' element={<HomePage/>} />
             <Route path='/noticias' element={<ArticlePage />} />
             <Route path='/articles/:id' element={<ArticlePageDetail />} />
             <Route path='/cursos-y-eventos' element={<EventPage />} />
-            <Route path='/cursos-y-eventos/form' element={<InscriptionPage />} />
+            <Route path="/cursos-y-eventos/form/:id_event" element={<InscriptionPage />} />
             <Route path='/nosotros' element={<InfoNosotros />} />
             <Route path='/catalogo' element={<CatalogPage />} />
             <Route path='/donaciones' element={<DonationsPage />} />
@@ -67,6 +71,8 @@ function App() {
             <Route path="/admin/articles" element={<ArticleManagerPage />} />
             <Route path="/admin/article-new" element={<ArticleCreationPage />} />
             <Route path="/admin/events" element={<EventManagerPage />} />
+            <Route path="/admin/event-new" element={<EventCreationPage />} />
+            <Route path="/admin/inscriptions" element={<InscriptionManagerPage />}/>
             {/* Usuarios: accesible por adm y super_adm */}
             <Route path="/admin/users" element={<UserManagerPage />} />
           </Route>

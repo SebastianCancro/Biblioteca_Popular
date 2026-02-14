@@ -1,67 +1,106 @@
-/* Fondo y estructura del modal de Editar Usuario */
+/* EDIT USER MODAL*/
 .edit-user-dialog .MuiDialog-paper {
   background: linear-gradient(180deg, #fffaf2 0%, #f5e6d3 100%) !important;
   color: #5d3a00 !important;
   font-family: "Georgia", serif !important;
-  border-radius: 12px !important;
-  box-shadow: 0 6px 20px rgba(93, 58, 0, 0.25) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 30px rgba(93, 58, 0, 0.25) !important;
+  padding: 18px 20px !important;
+  max-width: 760px !important; 
+  width: min(92vw, 760px) !important;
 }
-
 /* Título */
 .edit-user-dialog .MuiDialogTitle-root {
   color: #5d3a00 !important;
-  font-weight: bold !important;
+  font-weight: 700 !important;
   text-align: center;
-  font-size: 1.4rem !important;
-  margin-bottom: 0.6rem;
+  font-size: 1.8rem !important; 
+  margin-bottom: 0.75rem !important;
 }
-
-/* Cuerpo del modal */
+/* Etiquetas */
 .edit-user-dialog .MuiInputLabel-root {
   color: #5d3a00 !important;
   font-weight: 600 !important;
+  font-size: 1rem !important;
 }
-
-.edit-user-dialog .MuiInputBase-input,
-.edit-user-dialog input,
-.edit-user-dialog select {
-  color: #5d3a00 !important;
-  border: 1px solid #d2b48c !important;
+/* Campos */
+.edit-user-dialog .MuiOutlinedInput-root {
   background-color: #fffaf2 !important;
-  border-radius: 6px !important;
-  padding: 0.4rem 0.6rem !important;
+  border-radius: 10px !important;
 }
 
-.edit-user-dialog .MuiInputBase-input:focus {
+.edit-user-dialog .MuiOutlinedInput-notchedOutline {
+  border-color: #d2b48c !important;
+}
+.edit-user-dialog .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   border-color: #8b5e34 !important;
-  box-shadow: 0 0 6px rgba(139, 94, 52, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(139, 94, 52, 0.15) !important;
+}
+.edit-user-dialog .MuiInputBase-input {
+  color: #5d3a00 !important;
+  font-size: 1.05rem !important;   
+  padding: 12px 14px !important;    
+}
+.edit-user-dialog .MuiDialogContent-root {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
 }
 
-/* Botón Cancelar */
-.edit-user-dialog button.MuiButton-textSecondary {
+.edit-user-dialog .MuiDialogActions-root {
+  padding: 8px 0 0 0 !important;
+  gap: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Boton Cancelar */
+.edit-user-dialog .MuiButton-textSecondary {
   background-color: #f5e6d3 !important;
   color: #5d3a00 !important;
-  font-weight: bold !important;
-  border-radius: 8px !important;
-  transition: all 0.3s ease;
+  font-weight: 700 !important;
+  border-radius: 10px !important;
+  padding: 10px 18px !important;     
+  font-size: 1rem !important;
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 150ms ease !important;
 }
-
-.edit-user-dialog button.MuiButton-textSecondary:hover {
+.edit-user-dialog .MuiButton-textSecondary:hover {
   background-color: #e6d0b8 !important;
-  transform: scale(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(93, 58, 0, 0.18) !important;
 }
-
-/* Botón Guardar Cambios */
-.edit-user-dialog button.MuiButton-containedPrimary {
+/* Boton guardar */
+.edit-user-dialog .MuiButton-containedPrimary {
   background-color: #8b5e34 !important;
   color: #fff !important;
-  font-weight: bold !important;
-  border-radius: 8px !important;
-  box-shadow: 0 3px 10px rgba(139, 69, 19, 0.4) !important;
-  transition: all 0.3s ease;
+  font-weight: 700 !important;
+  border-radius: 10px !important;
+  padding: 10px 20px !important;    
+  font-size: 1rem !important;
+  box-shadow: 0 6px 16px rgba(139, 69, 19, 0.35) !important;
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 150ms ease !important;
 }
 
-.edit-user-dialog button.MuiButton-containedPrimary:hover {
+.edit-user-dialog .MuiButton-containedPrimary:hover {
   background-color: #5d3a00 !important;
-  transform: translateY(-2px) scale(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(139, 69, 19, 0.45) !important;
+}
+
+.edit-user-dialog .MuiButton-root.Mui-disabled {
+  opacity: 0.6 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+@media (max-width: 480px) {
+  .edit-user-dialog .MuiDialog-paper {
+    padding: 16px 14px !important;
+  }
+  .edit-user-dialog .MuiDialogTitle-root {
+    font-size: 1.5rem !important;
+  }
+  .edit-user-dialog .MuiInputBase-input {
+    font-size: 1rem !important;
+    padding: 11px 12px !important;
+  }
 }

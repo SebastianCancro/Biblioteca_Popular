@@ -1,62 +1,52 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Src\Service\User;
 
 use Src\Infrastructure\Repository\User\UserRepository;
 use Src\Entity\User\Exception\UserNotFoundException;
-
+use Src\Entity\User\Exception\UserInvalidCredentialsException; // 401 si el token es inválido //
+//Servicio para aprobar solicitudes: activa al usuario y lo promueve a admin.//
 final readonly class UserAuthorizeAdminService
 {
     private UserRepository $repository;
-    private UserFinderService $finder;
+    private UserFinderService $finder; // buscar usuarios por ID //
 
     public function __construct()
     {
         $this->repository = new UserRepository();
-        $this->finder = new UserFinderService();
+        $this->finder     = new UserFinderService();
     }
-
-    //Permite a un super_adm promover un usuario a admin//
-    public function promoteToAdmin(int $superAdmId, int $userId): void
+    //Autorizamos como admin (activa + role=admin ).//
+     public function approveAndPromote(int $actorId, int $userId): void
     {
-        //Verifico que el que hace la acción sea super_adm//
-        $superAdm = $this->finder->find($superAdmId);
-        if ($superAdm->role() !== 'super_adm') {
-            throw new \Exception("No autorizado: solo super_adm puede promover usuarios a admin.");
+        // Aseguro que el actor existe //
+        $actor = $this->finder->find($actorId);
+        if (!$actor) {
+            throw new UserNotFoundException($actorId);
         }
-
-        // Verifico que el usuario exista //
+        // Aseguro que el usuario objetivo existe//
         $user = $this->finder->find($userId);
         if (!$user) {
             throw new UserNotFoundException($userId);
         }
-
-        // Activa usuario pendiente y regenerar token si es necesario //
-        if (!$user->is_active()) {
-            $this->repository->activateUser($userId);
+        //Queda activo y promovido a admin //
+        $this->repository->authorizeAdmin($userId);
+    }
+    // Verificamos existencia del usuario objetivo y ejecutamos la promocion.//
+      public function approveAndPromoteByApiKey(string $apiKey, int $userId): void
+    {
+        // Si el token es invalido //
+        $actor = $this->repository->findByToken($apiKey);
+        if (!$actor) {
+            throw new UserInvalidCredentialsException();
         }
-
-        // si no tiene token, generamos uno nuevo //
-        if (empty($user->token())) {
-            $newToken = md5(uniqid((string)$userId, true));
-            $tokenDate = (new \DateTime('+24 hours'))->format('Y-m-d H:i:s');
-
-            $this->repository->execute(
-                "UPDATE users 
-                 SET token = :token,
-                     token_auth_date = :token_auth_date
-                 WHERE id = :id",
-                [
-                    "id" => $userId,
-                    "token" => $newToken,
-                    "token_auth_date" => $tokenDate
-                ]
-            );
+       // Aseguro que el usuario objetivo existe //
+        $user = $this->finder->find($userId);
+        if (!$user) {
+            throw new UserNotFoundException($userId);
         }
-
-        // Cambio rol a admin //
+        // Activacion //
         $this->repository->authorizeAdmin($userId);
     }
 }

@@ -74,6 +74,14 @@
   background-color: #fffaf5;
   transition: all 0.3s ease;
 }
+
+.table-row-title {
+  max-width: 250px;    
+  white-space: nowrap;      
+  overflow: hidden;       
+  text-overflow: ellipsis;  
+}
+
 .table-row:hover {
   background-color: #f0e0d6;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);

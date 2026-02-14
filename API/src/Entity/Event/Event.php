@@ -21,13 +21,12 @@ final class Event {
         return new self(null, $title, $description, $image,$end_date, $is_active, false);
     }
 
-    public function modify(string $title, string $description, string $image,?DateTime $end_date, bool $is_active =true): void
+    public function modify(string $title, string $description, string $image, ?DateTime $end_date): void
     {
         $this->title = $title;
         $this->description = $description;
         $this->image = $image;
         $this->end_date = $end_date;
-        $this->is_active = $is_active;
     }
 
 

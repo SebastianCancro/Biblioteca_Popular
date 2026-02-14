@@ -50,10 +50,12 @@ final class PDOClient {
     private function generateUrl(): string
     {
         return sprintf(
-            '%s:host=%s;dbname=%s',
+            '%s:host=%s;port=%s;dbname=%s;charset=utf8mb4',
             $_ENV['DATABASE_DRIVER'],
-            sprintf('%s:%s', $_ENV['DATABASE_HOST'], $_ENV['DATABASE_PORT']),
+            $_ENV['DATABASE_HOST'],
+            $_ENV['DATABASE_PORT'],
             $_ENV['DATABASE_NAME']
         );
     }
+
 }

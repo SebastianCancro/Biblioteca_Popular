@@ -1,12 +1,12 @@
 .library-header {
   width: 100%;
-  background: linear-gradient(to bottom, #D87A2E, #F4A35E);
+  background: linear-gradient(to bottom, #15616d, #15616de5);
   display: flex;
   justify-content: center;
   align-items: baseline;
   gap: 0.25rem; 
   font-family: 'Georgia', serif;
-  color: #F4C16E;
+  color: #ffecd1;
   box-sizing: border-box;
   padding: 0.35rem;
   flex: 0 0 auto;
@@ -60,7 +60,7 @@
   letter-spacing: 2px;
   margin: 0;
   line-height: 1;
-  color: #ffffff !important;
+  color: #ffecd1 !important;
   -webkit-text-stroke: 0.5px rgba(0,0,0,0.28);
   text-shadow:
     0 1px 0 rgba(255,255,255,0.06),
@@ -80,7 +80,7 @@
   font-weight: 700;
   font-size: clamp(0.9rem, 1.2vw, 1.05rem);
   margin: 0.35rem 0 0 0;
-  color: #ffffff !important;
+  color: #ffecd1 !important;
   text-shadow:
     0 1px 0 rgba(255,255,255,0.04),
     0 2px 4px rgba(0,0,0,0.22);

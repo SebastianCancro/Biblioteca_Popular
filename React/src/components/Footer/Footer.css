@@ -1,7 +1,7 @@
 .library-footer {
   width: 100%;
-  background: linear-gradient(to top, #F4A35E, #D87A2E);
-  color: #2C1205;
+  background: linear-gradient(to top, #001524, #001524ee);
+  color: #ffecd1;
   padding: 0.5rem 1rem; 
   box-sizing: border-box;
   font-family: 'Georgia', serif;
@@ -18,7 +18,6 @@
   margin-bottom: 0.4rem;
   font-size: 1rem; 
   font-weight: 900;
-  color: #1A0C05;
   letter-spacing: 0.6px;
 }
 
@@ -36,7 +35,7 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  color: #1A0C05;
+  color: #15616d;
   font-weight: 900;
 }
 
@@ -64,7 +63,7 @@
   margin-top: 0.3rem;
   font-size: 0.7rem;
   font-style: italic;
-  color: #2C1205;
+  color: #ffecd1;
   opacity: 0.9;
   font-weight: 900;
 }

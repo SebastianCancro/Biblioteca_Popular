@@ -8,7 +8,7 @@
   padding: 0.2rem 0;            
 }
 .MuiAppBar-root {
-  background-color: #000000 !important;
+  background-color: #001524 !important;
   box-shadow: none !important;
   min-height: 44px !important;   
 }
@@ -19,9 +19,10 @@
   padding: 0.14rem 1rem !important;
   min-height: 44px !important;
 }
+
 .NavButton {
-  color: #F4C16E !important;
-  background: #FFB066;
+  color: #ffecd1 !important;
+  background: #ff7d00;
   font-family: 'Georgia', serif;
   font-weight: 800;                     
   font-size: clamp(1rem, 1.5vw, 1.2rem);
@@ -43,15 +44,15 @@
 }
 .NavButton:hover,
 .NavButton.MuiButton-root:hover {
-  background: #F4A35E !important;
-  color: #fff !important;
+  background: #ffecd1 !important;
+  color: #15616d !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 8px rgba(0,0,0,0.18) !important;
 }
 .NavButton.active,
 .NavButton.MuiButton-root.active {
-  background: #fff !important;
-  color: #D87A2E !important;
+  background: #ff7d00 !important;
+  color: #ffecd1 !important;
   box-shadow: 0 3px 6px rgba(0,0,0,0.22) !important;
 }
 .NavButton, .NavButton .MuiButton-label {

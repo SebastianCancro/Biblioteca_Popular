@@ -2,6 +2,6 @@ html, body, #root {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background:#FFF5B7;
+  background:#f8f9faab;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }

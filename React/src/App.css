@@ -12,7 +12,7 @@ html, body, #root {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background:#e1d6c8;
+  background:#ffecd1;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 .page-wrapper {
@@ -23,15 +23,14 @@ html, body, #root {
   align-items: center;
   padding: 0;
   box-sizing: border-box;
-  background: #e1d6c8; 
-  color: #b87333;
+
 }
 
 
 
 .loading-spinner {
   border: 5px solid #d1bfa3;    
-  border-top: 5px solid #b87333; 
+  border-top: 5px solid #f4a261; 
   border-radius: 50%;
   width: 50px;
   height: 50px;

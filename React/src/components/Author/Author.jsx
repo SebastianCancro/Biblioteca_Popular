@@ -111,7 +111,7 @@ export default function Author() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % authors.length);
-    }, 15000); // 15 segundos
+    }, 30000); // 30 segundos
 
     return () => clearInterval(interval);
   }, []);
@@ -142,28 +142,3 @@ export default function Author() {
   </section>
 );
 }
-
-  /*return (
-    <section className="author-carousel-section fade-in">
-      <div className="author-card">
-        <div className="author-left">
-          <img src={author.image} alt={author.name} className="author-image" />
-
-          <div className="author-facts">
-            <div className="author-facts-title">Sabías que</div>
-            <ul className="author-facts-list">
-              {author.facts.map((fact, i) => (
-                <li key={i}>{fact}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div className="author-right">
-          <div className="author-name">{author.name}</div>
-          <p className="author-bio">{author.bio}</p>
-        </div>
-      </div>
-    </section>
-  );
-}*/

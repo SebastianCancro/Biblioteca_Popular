@@ -42,6 +42,7 @@ final readonly class InscriptionRepository extends PDOManager implements Inscrip
         ];
         $this->execute($query, $parameters);
     }
+    
         public function exists(string $email, int $id_event): bool 
     {
         $query = <<<HEREDOC
@@ -90,8 +91,6 @@ final readonly class InscriptionRepository extends PDOManager implements Inscrip
     }
     return $out;
 }
-
-
     public function insert(Inscription $inscription): void
 {
     $query = "INSERT INTO inscriptions (name, surname, email, phone, id_event)
@@ -107,10 +106,6 @@ final readonly class InscriptionRepository extends PDOManager implements Inscrip
 
     $this->execute($query, $parameters);
 }
-
-
-    
-
     private function primitiveToInscription(?array $p): ?Inscription
 {
     if ($p === null) return null;

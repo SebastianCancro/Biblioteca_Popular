@@ -12,45 +12,43 @@ final readonly class EventPostController{
         $this->auth = new AuthMiddleware();
     }
 
-public function start(): void{
+    public function start(): void{
+            try {
+                
+                $this->auth->authenticate(true, ['admin', 'super_adm']);
 
-        try {
             
-            $this->auth->authenticate(true, ['admin', 'super_adm']);
+                $title = ControllerUtils::getPost("title");
+                $description = ControllerUtils::getPost("description");
+                $image  = ControllerUtils::getPost("image");
+                $endDateString = ControllerUtils::getPost("end_date");
+                $endDate = null;
 
-           
-            $title = ControllerUtils::getPost("title");
-            $description = ControllerUtils::getPost("description");
-            $image  = ControllerUtils::getPost("image");
-            $endDateString = ControllerUtils::getPost("end_date");
-            $endDate = null;
-
-            if (!empty($endDateString)) {
-                try {
-            $endDate = new \DateTime($endDateString);
-                } catch (\Exception $e) {
-            http_response_code(400);
-            echo json_encode(["error" => "Formato de fecha inválido para 'end_date'."]);
-            exit;
-            }
+                if (!empty($endDateString)) {
+                    try {
+                $endDate = new \DateTime($endDateString);
+                    } catch (\Exception $e) {
+                http_response_code(400);
+                echo json_encode(["error" => "Formato de fecha inválido para 'end_date'."]);
+                exit;
                 }
+                    }
 
-        
-            $this->service->create($title, $description, $image, $endDate);
+            
+                $this->service->create($title, $description, $image, $endDate);
 
-            header('Content-Type: application/json');
-            http_response_code(201);
-            echo json_encode([
-                "message" => "Evento creado correctamente",
-                "title"   => $title
-            ]);
-        } catch (Exception $e) {
-            // Manejar error //
-            header('Content-Type: application/json');
-            http_response_code(500);
-            echo json_encode(["error" => $e->getMessage()]);
-        }
-
-        exit;
+                header('Content-Type: application/json');
+                http_response_code(201);
+                echo json_encode([
+                    "message" => "Evento creado correctamente",
+                    "title"   => $title
+                ]);
+            } catch (Exception $e) {
+                // Manejar error //
+                header('Content-Type: application/json');
+                http_response_code(500);
+                echo json_encode(["error" => $e->getMessage()]);
+            }
+     exit;
     }
 }

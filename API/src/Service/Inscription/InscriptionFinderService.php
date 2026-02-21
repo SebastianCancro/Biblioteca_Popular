@@ -29,4 +29,11 @@ final readonly class InscriptionFinderService {
         return $inscription;
     }
 
+        public function exists(string $email, int $id_event): Inscription 
+    {
+        $exist = $this->inscriptionRepository->exists($email, $id_event);
+
+        return $exist;
+    }
+
 }

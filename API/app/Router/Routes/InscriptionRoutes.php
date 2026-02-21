@@ -27,8 +27,19 @@ final readonly class InscriptionRoutes {
         "controller" => "Inscription/InscriptionsGetController.php",
         "method" => "GET"
 
-      ]
-      
+      ],
+      [
+        "name" => "inscription_delete",
+        "url" => "/inscription-cursos-eventos/{id}",
+        "controller" => "Inscription/InscriptionDeleteController.php",
+        "method" => "DELETE",
+        "parameters" => [
+          [
+            "name" => "id",
+            "type" => "int"
+          ]
+        ]
+      ],
     ];
   }
 }

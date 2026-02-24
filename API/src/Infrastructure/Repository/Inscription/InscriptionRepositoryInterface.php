@@ -12,5 +12,6 @@ interface InscriptionRepositoryInterface {
     public function search(): array;
     public function delete(int $id): void;
     public function find(int $id): ?Inscription ;
+    public function searchByEvent(int $id_event): array;
     public function exists(string $email, int $id_event): bool;
 }

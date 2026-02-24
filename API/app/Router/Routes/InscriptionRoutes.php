@@ -16,6 +16,18 @@ final readonly class InscriptionRoutes {
         ]
       ],
       [
+        "name" => "inscription_get",
+        "url"=> "/inscription-cursos-eventos/event/{id}",
+        "controller" => "Inscription/InscriptionsByEventGetController.php",
+        "method" => "GET",
+        "parameters" => [
+          [
+            "name" => "id",
+            "type" => "int"
+          ]
+        ]
+      ],
+      [
         "name" => "inscription_create",
         "url" => "/inscription-cursos-eventos",
         "controller" => "Inscription/InscriptionPostController.php",
@@ -26,7 +38,6 @@ final readonly class InscriptionRoutes {
         "url" => "/inscription-cursos-eventos",
         "controller" => "Inscription/InscriptionsGetController.php",
         "method" => "GET"
-
       ],
       [
         "name" => "inscription_delete",

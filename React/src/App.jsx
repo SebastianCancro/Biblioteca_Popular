@@ -72,7 +72,7 @@ function App() {
             <Route path="/admin/article-new" element={<ArticleCreationPage />} />
             <Route path="/admin/events" element={<EventManagerPage />} />
             <Route path="/admin/event-new" element={<EventCreationPage />} />
-            <Route path="/admin/inscriptions" element={<InscriptionManagerPage />}/>
+            <Route path="/admin/events/:id/inscriptions" element={<InscriptionManagerPage />} />
             {/* Usuarios: accesible por adm y super_adm */}
             <Route path="/admin/users" element={<UserManagerPage />} />
           </Route>

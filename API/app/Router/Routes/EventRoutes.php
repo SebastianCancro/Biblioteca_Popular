@@ -51,7 +51,6 @@ final readonly class EventRoutes {
           ]
         ]
       ]
-      
     ];
   }
 }

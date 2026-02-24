@@ -1,89 +1,177 @@
 import { useEffect, useState } from "react";
-import { inscriptionService } from "../../../services/inscriptionService";
 import {
-  Button,
   Container,
+  Typography,
   Table,
+  TableBody,
+  TableCell,
+  TableContainer,
   TableHead,
   TableRow,
-  TableCell,
-  TableBody,
-  Typography,
-  CircularProgress,
   Paper,
+  IconButton,
+  CircularProgress,
+  Button,
+  Tooltip,
+  TablePagination,
+  Box,
 } from "@mui/material";
+
+import { Delete, ArrowBack } from "@mui/icons-material";
+import { useNavigate, useParams } from "react-router";
+import { inscriptionService } from "../../../services/inscriptionService";
+import { eventService } from "../../../services/eventService";
+
 import "./InscriptionManagerPage.css";
-import { useNavigate } from "react-router";
 
 export function InscriptionManagerPage() {
   const navigate = useNavigate();
+  const { id } = useParams();
+
   const [inscriptions, setInscriptions] = useState([]);
+  const [eventData, setEventData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [deletingID, setDeletingID] = useState(null);
 
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  // Obtener evento + inscriptos
   useEffect(() => {
-    async function fetchInscriptions() {
-      try {
-        const response = await inscriptionService.getAllInscriptions();
-        // Asegurate que sea response.data (si usás axios)
-        setInscriptions(response.data || []);
-      } catch (error) {
-        console.error("Error al obtener inscripciones:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
+    setLoading(true);
 
-    fetchInscriptions();
-  }, []);
+    Promise.all([
+      eventService.getEventById(id),
+      inscriptionService.getInscriptionsByEvent(id),
+    ])
+      .then(([eventResponse, inscriptionsResponse]) => {
+        setEventData(eventResponse.data);
+        setInscriptions(inscriptionsResponse.data ?? []);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  const handleEliminar = async (inscriptionId) => {
+    if (!window.confirm("¿Eliminar esta inscripción?")) return;
+
+    try {
+      setDeletingID(inscriptionId);
+      await inscriptionService.deleteInscriptionById(inscriptionId);
+      setInscriptions((prev) =>
+        prev.filter((ins) => ins.id !== inscriptionId)
+      );
+    } catch (err) {
+      alert("Error al eliminar la inscripción");
+      console.error(err);
+    } finally {
+      setDeletingID(null);
+    }
+  };
+
+  const handleBack = () => {
+    navigate("/admin/events");
+  };
 
   return (
     <div className="inscription-manager-page">
-      <Container maxWidth="md" className="crear-container">
-        <Button
-          variant="contained"
-          color="primary"
-          className="volver-btn"
-          onClick={() => navigate(-1)}
+      <Container className="container">
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 3,
+          }}
         >
-          ← Volver
-        </Button>
-        
-        <Typography className="title-inscription" variant="h4">
-          Lista de Inscripciones
-        </Typography>
+          <Box>
+            <Typography variant="h4">
+              Inscriptos del Evento
+            </Typography>
+            <Typography variant="subtitle1" color="text.secondary">
+              {eventData?.title || "Cargando..."}
+            </Typography>
+          </Box>
+
+          <Tooltip title="Volver a eventos">
+            <IconButton onClick={handleBack}>
+              <ArrowBack />
+            </IconButton>
+          </Tooltip>
+        </Box>
 
         {loading ? (
-          <CircularProgress />
-        ) : inscriptions.length === 0 ? (
-          <Typography variant="body1">No hay inscripciones registradas.</Typography>
+          <Box sx={{ textAlign: "center", marginTop: 5 }}>
+            <CircularProgress />
+          </Box>
         ) : (
-          <Paper>
-            <Table className="inscription-table">
-              <TableHead className="table-header">
-                <TableRow>
-                  <TableCell><b>ID</b></TableCell>
-                  <TableCell><b>Nombre</b></TableCell>
-                  <TableCell><b>Apellido</b></TableCell>
-                  <TableCell><b>Email</b></TableCell>
-                  <TableCell><b>Teléfono</b></TableCell>
-                  <TableCell><b>ID Evento</b></TableCell>
-                  <TableCell><b>Nombre del Evento</b></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                  {inscriptions.map((inscription) => (
-                    <TableRow className="table-row" key={inscription.id}>
-                      <TableCell data-label="ID">{inscription.id}</TableCell>
-                      <TableCell data-label="Nombre">{inscription.name}</TableCell>
-                      <TableCell data-label="Apellido">{inscription.surname}</TableCell>
-                      <TableCell data-label="Email">{inscription.email}</TableCell>
-                      <TableCell data-label="Teléfono">{inscription.phone}</TableCell>
-                      <TableCell data-label="ID Evento">{inscription.id_event}</TableCell>
-                      <TableCell data-label="Nombre del Evento">{inscription.event}</TableCell>
+          <Paper className="table-container">
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell><b>ID</b></TableCell>
+                    <TableCell><b>Nombre</b></TableCell>
+                    <TableCell><b>Email</b></TableCell>
+                    <TableCell><b>Fecha inscripción</b></TableCell>
+                    <TableCell align="right"><b>Acciones</b></TableCell>
+                  </TableRow>
+                </TableHead>
+
+                <TableBody>
+                  {inscriptions.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={5} align="center">
+                        No hay inscriptos en este evento
+                      </TableCell>
                     </TableRow>
-                  ))}
+                  ) : (
+                    inscriptions
+                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                      .map((ins) => (
+                        <TableRow key={ins.id}>
+                          <TableCell>{ins.id}</TableCell>
+                          <TableCell>{ins.name}</TableCell>
+                          <TableCell>{ins.email}</TableCell>
+                          <TableCell>
+                            {ins.created_at
+                              ? String(ins.created_at).slice(0, 10)
+                              : "-"}
+                          </TableCell>
+
+                          <TableCell align="right">
+                            <Tooltip title="Eliminar inscripción">
+                              <IconButton
+                                color="error"
+                                onClick={() => handleEliminar(ins.id)}
+                                disabled={deletingID === ins.id}
+                              >
+                                <Delete />
+                              </IconButton>
+                            </Tooltip>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                  )}
                 </TableBody>
-            </Table>
+              </Table>
+            </TableContainer>
+
+            <TablePagination
+              component="div"
+              count={inscriptions.length}
+              page={page}
+              onPageChange={(e, newPage) => setPage(newPage)}
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={(e) => {
+                setRowsPerPage(parseInt(e.target.value, 10));
+                setPage(0);
+              }}
+              labelRowsPerPage="Filas por página:"
+              rowsPerPageOptions={[5, 10, 25]}
+            />
           </Paper>
         )}
       </Container>

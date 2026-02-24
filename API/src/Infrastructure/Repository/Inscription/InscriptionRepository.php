@@ -28,6 +28,38 @@ final readonly class InscriptionRepository extends PDOManager implements Inscrip
         
         return $this->primitiveToInscription($result[0] ?? null);
     }
+    public function searchByEvent(int $id_event): array
+    {
+        $query = <<<SQL
+            SELECT 
+                A.id,
+                A.name,
+                A.surname,
+                A.email,
+                A.phone,
+                A.id_event,
+                E.title AS event_title
+            FROM inscriptions A
+            LEFT JOIN events E ON E.id = A.id_event
+            WHERE E.deleted = 0
+            AND A.id_event = :id_event
+            ORDER BY A.id DESC
+        SQL;
+
+        $parameters = [
+            ":id_event" => $id_event
+        ];
+
+        $results = $this->execute($query, $parameters );
+
+        if (!is_array($results) || !$results) return [];
+
+        $out = [];
+        foreach ($results as $row) {
+            $out[] = $this->primitiveToInscription($row);
+        }
+        return $out;
+    }
         public function delete(int $id): void
     {
         $query = <<<HEREDOC

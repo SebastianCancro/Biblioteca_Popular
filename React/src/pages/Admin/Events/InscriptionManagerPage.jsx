@@ -15,12 +15,14 @@ import {
   Tooltip,
   TablePagination,
   Box,
+  Chip,
 } from "@mui/material";
 
-import { Delete, ArrowBack } from "@mui/icons-material";
+import { Delete, ArrowBack, Download } from "@mui/icons-material";
 import { useNavigate, useParams } from "react-router";
 import { inscriptionService } from "../../../services/inscriptionService";
 import { eventService } from "../../../services/eventService";
+import { inscriptionExportService } from "../../../services/inscriptionExportService";
 
 import "./InscriptionManagerPage.css";
 
@@ -75,9 +77,30 @@ export function InscriptionManagerPage() {
     navigate("/admin/events");
   };
 
+const handleDownloadExcel = async () => {
+  try {
+    const blob = await inscriptionExportService.exportByEvent(id);
+
+    const url = window.URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `inscriptos_evento_${id}.xlsx`);
+    document.body.appendChild(link);
+    link.click();
+
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error(error);
+    alert("Error al descargar el archivo");
+  }
+};
+
   return (
     <div className="inscription-manager-page">
       <Container className="container">
+        {/* HEADER SUPERIOR */}
         <Box
           sx={{
             display: "flex",
@@ -90,18 +113,42 @@ export function InscriptionManagerPage() {
             <Typography variant="h4">
               Inscriptos del Evento
             </Typography>
+
             <Typography variant="subtitle1" color="text.secondary">
               {eventData?.title || "Cargando..."}
             </Typography>
+
+            {/* Cantidad total */}
+            {!loading && (
+              <Chip
+                label={`Total: ${inscriptions.length} inscriptos`}
+                color="primary"
+                sx={{ marginTop: 1 }}
+              />
+            )}
           </Box>
 
-          <Tooltip title="Volver a eventos">
-            <IconButton onClick={handleBack}>
-              <ArrowBack />
-            </IconButton>
-          </Tooltip>
+          <Box sx={{ display: "flex", gap: 1 }}>
+            <Tooltip title="Descargar planilla Excel">
+              <Button
+                variant="contained"
+                startIcon={<Download />}
+                onClick={handleDownloadExcel}
+                disabled={inscriptions.length === 0}
+              >
+                Descargar Planilla
+              </Button>
+            </Tooltip>
+
+            <Tooltip title="Volver a eventos">
+              <IconButton onClick={handleBack}>
+                <ArrowBack />
+              </IconButton>
+            </Tooltip>
+          </Box>
         </Box>
 
+        {/* CONTENIDO */}
         {loading ? (
           <Box sx={{ textAlign: "center", marginTop: 5 }}>
             <CircularProgress />

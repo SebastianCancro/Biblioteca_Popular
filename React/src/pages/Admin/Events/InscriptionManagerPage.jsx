@@ -110,7 +110,7 @@ const handleDownloadExcel = async () => {
           }}
         >
           <Box>
-            <Typography variant="h4">
+            <Typography className="title-inscription">
               Inscriptos del Evento
             </Typography>
 

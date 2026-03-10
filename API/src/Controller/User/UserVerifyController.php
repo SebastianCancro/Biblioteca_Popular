@@ -28,9 +28,11 @@ final readonly class UserVerifyController
         echo json_encode([
             'id' => $u->id(),
             'name' => $u->name(),
+            'apellido' => $u->apellido(),
+            'dni' => $u->dni(),
             'email'=> $u->email(),
-            'token_auth_date'=> $u->token_auth_date()?->format('Y-m-d H:i:s'),
             'role'=> $u->role(),
+            'token_auth_date'=> $u->token_auth_date()?->format('Y-m-d H:i:s'),
             'is_active'=> $u->is_active(),
         ], JSON_UNESCAPED_UNICODE);
     }

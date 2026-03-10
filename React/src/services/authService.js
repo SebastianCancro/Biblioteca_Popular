@@ -1,4 +1,6 @@
+import { api } from "./api";
 export const authService = {
+  // Login de usuario //
   login: (email, password) =>
     api
       .post("/users/login", { email, password }, {
@@ -6,10 +8,11 @@ export const authService = {
       })
       .then((res) => res.data),
 
+  // Verificación de token //
   verify: () =>
     api.get("/users/verify")
        .then((res) => res.data),
-
+  // Login de usuario //
   register: (payload) =>
     api
       .post("/users/register", payload, {
@@ -17,8 +20,7 @@ export const authService = {
       })
       .then((res) => res.data),
 
-  me: () => api.get("/me").then((res) => res.data),
-
+  // Logout de usuario //
   logout: () => {
     try {
       localStorage.removeItem("token");

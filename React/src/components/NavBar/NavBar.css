@@ -22,16 +22,13 @@
 
 .NavButton {
   color: #ffecd1 !important;
-  background: #ff7d00;
+  background-color: transparent !important;
   font-family: 'Georgia', serif;
   font-weight: 800;                     
   font-size: clamp(1rem, 1.5vw, 1.2rem);
-  padding: 0.45rem 0.9rem;               
-  border-radius: 0 !important;                    
+  padding: 0.45rem 0.9rem;                              
   text-transform: none;
-  transition: background 0.22s ease, transform 0.18s ease, box-shadow 0.18s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
-  border: none;
+  border-radius: 3px !important;
   line-height: 1;
   min-width: 0;                         
 }
@@ -44,14 +41,14 @@
 }
 .NavButton:hover,
 .NavButton.MuiButton-root:hover {
-  background: #ffecd1 !important;
+  background-color: #ffecd1 !important;
   color: #15616d !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 8px rgba(0,0,0,0.18) !important;
 }
 .NavButton.active,
 .NavButton.MuiButton-root.active {
-  background: #ff7d00 !important;
+  background-color: #ff7d00 !important;
   color: #ffecd1 !important;
   box-shadow: 0 3px 6px rgba(0,0,0,0.22) !important;
 }

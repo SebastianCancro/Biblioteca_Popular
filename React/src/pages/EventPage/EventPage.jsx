@@ -48,24 +48,27 @@ function EventPage() {
           {events.map((curso) => (
             <Card key={curso.id} className="event-Card" variant="outlined">
               <CardContent>
-                {curso.image ? (
+                {curso?.image?.trim() ? (
                   <img
                     src={curso.image.trim()}
                     alt={curso.title}
                     className="event-image"
                   />
                 ) : (
-                  <div className="event-image-placeholder">
-                    <p>Sin imagen disponible</p>
-                  </div>
+                  <img
+                    src="../../public/Images/Default.png"
+                    className="event-image"
+                  />
                 )}
 
-                <h1>{curso.title}</h1>
+                <h2>{curso.title}</h2>
+
                 <p>{curso.description}</p>
+
                 <p>
                   Fecha de Finalización:{" "}
-                  {curso.end_date
-                    ? curso.end_date.split("-").reverse().join("-")
+                  {curso?.end_date
+                    ? new Date(curso.end_date).toLocaleDateString("es-AR")
                     : "-"}
                 </p>
               </CardContent>

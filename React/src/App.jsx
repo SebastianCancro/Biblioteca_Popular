@@ -2,8 +2,8 @@ import "./App.css";
 import "@mantine/core/styles.css";
 
 import { MantineProvider } from "@mantine/core";
-import { RegisterPage } from "./pages/RegisterPage/RegisterPage";
-import { LoginPage } from "./pages/LoginPage/LoginPage";
+import { RegisterPage } from "./pages/admin/RegisterPage/RegisterPage";
+import { LoginPage } from "./pages/admin/LoginPage/LoginPage";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router";
 import { PrivateRoute, PublicRoute } from "./Routes";
 
@@ -14,7 +14,6 @@ import { HomePage } from "./pages/HomePage/HomePage";
 import InfoNosotros from './components/InfoNosotros/InfoNosotros';
 import { DonationsPage } from "./pages/DonationsPage/DonationsPage";
 import Questions from './components/Questions/Questions';
-import InscriptionPage from "./pages/InscriptionPage/InscriptionPage";
 import { ArticleManagerPage } from "./pages/Admin/Articles/ArticleManagerPage";
 import { ArticleCreationPage } from "./pages/Admin/Articles/ArticleCreationPage";
 import { ArticlePage } from "./pages/ArticlePage/ArticlePage";
@@ -25,7 +24,6 @@ import { AdminHomePage } from "./pages/Admin/Home/AdminHomePage";
 import { EventManagerPage } from "./pages/Admin/Events/EventManagerPage";
 import { InscriptionManagerPage } from "./pages/Admin/Events/InscriptionManagerPage";
 
-// CORRECCIÓN: default import para UserManagerPage
 import UserManagerPage from "./pages/Admin/Users/UserManagerPage";
 import { EventCreationPage } from "./pages/Admin/Events/EventCreationPage";
 
@@ -52,7 +50,6 @@ function App() {
             <Route path='/noticias' element={<ArticlePage />} />
             <Route path='/articles/:id' element={<ArticlePageDetail />} />
             <Route path='/cursos-y-eventos' element={<EventPage />} />
-            <Route path="/cursos-y-eventos/form/:id_event" element={<InscriptionPage />} />
             <Route path='/nosotros' element={<InfoNosotros />} />
             <Route path='/catalogo' element={<CatalogPage />} />
             <Route path='/donaciones' element={<DonationsPage />} />

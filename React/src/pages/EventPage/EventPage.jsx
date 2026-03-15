@@ -1,19 +1,28 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
+
 import "./EventPage.css";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { eventService } from "../../services/eventService";
+import InscriptionForm from "./InscriptionForm";
 
 function EventPage() {
-  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const ToForm = (id) => {
-    navigate(`/cursos-y-eventos/form/${id}`);
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const handleOpenModal = (event) => {
+    setSelectedEvent(event);
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setSelectedEvent(null);
   };
 
   async function fetchData() {
@@ -56,7 +65,8 @@ function EventPage() {
                   />
                 ) : (
                   <img
-                    src="../../public/Images/Default.png"
+                    src="/Images/Default.png"
+                    alt="default"
                     className="event-image"
                   />
                 )}
@@ -76,7 +86,7 @@ function EventPage() {
               <CardActions>
                 <Button
                   size="small"
-                  onClick={() => ToForm(curso.id)}
+                  onClick={() => handleOpenModal(curso)}
                   className="event-button"
                 >
                   Inscribirse
@@ -86,6 +96,12 @@ function EventPage() {
           ))}
         </div>
       )}
+
+      <InscriptionForm
+        open={openModal}
+        onClose={handleCloseModal}
+        event={selectedEvent}
+      />
     </main>
   );
 }

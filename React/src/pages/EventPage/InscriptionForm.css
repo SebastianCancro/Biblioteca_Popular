@@ -1,0 +1,78 @@
+.MuiDialog-paper {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.MuiDialogTitle-root {
+  color: #001524;
+  font-weight: 600 !important;
+  text-align: center;;
+  border-bottom: 1px solid #d1d3d6;
+}
+
+.MuiDialogContent-root {
+  padding-top: 20px !important;
+}
+
+.MuiTextField-root .MuiOutlinedInput-root {
+  background-color: #fffdf8;
+  border-radius: 8px;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: #d9c7a8 !important;
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #15616d !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #ff7d00 !important;
+  border-width: 2px;
+}
+
+.MuiInputLabel-root {
+  color: #093250 !important; 
+}
+
+.MuiInputLabel-root.Mui-focused {
+  color: #ff7d00 !important;
+}
+
+.MuiDialogActions-root {
+  margin-top: 8px;
+  padding-bottom: 8px;
+}
+
+.MuiDialogActions-root button:first-of-type {
+  color: #15616d;
+  border: 1px solid #15616d;
+  background: transparent;
+  border-radius: 8px;
+  padding: 6px 16px;
+  transition: all 0.2s ease;
+}
+
+.MuiDialogActions-root button:first-of-type:hover {
+  background: #15616d;
+  color: white;
+}
+
+.MuiDialogActions-root button:last-of-type {
+  background: #ff7d00;
+  color: white;
+  border-radius: 8px;
+  padding: 6px 18px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.MuiDialogActions-root button:last-of-type:hover {
+  background: #e96f00;
+}
+
+.MuiAlert-root {
+  border-radius: 8px;
+}

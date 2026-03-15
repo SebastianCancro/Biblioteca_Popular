@@ -58,12 +58,13 @@
   margin-top: 24px;
   font-weight: 600;
   cursor: pointer;
-  color: #222;
+  color: #ff7d00;
+  text-decoration: underline;
   transition: color 0.2s ease;
 }
 
 .see-all-news:hover {
-  color: #b86b2f;
+  color: #a8772c;
 }
 
 .homepage-loading {

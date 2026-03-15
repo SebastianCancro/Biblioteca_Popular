@@ -12,7 +12,7 @@ import {
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { authService } from "../../services/authService";
+import { authService } from "../../../services/authService";
 import { useState, useEffect } from "react";
 
 const UserSchema = z.object({
